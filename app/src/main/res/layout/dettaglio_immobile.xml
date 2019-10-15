@@ -1,0 +1,282 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    		    android:layout_width="fill_parent" 
+    		    android:layout_height="fill_parent"> 
+    		    
+     <LinearLayout
+            android:id="@+id/winktoolbar"
+            style="?buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="top|center_horizontal"
+            android:background="#000000"
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
+    
+         <RelativeLayout android:layout_width="match_parent"
+        		android:layout_height="49dp"
+        		android:layout_gravity="top|center_horizontal"
+        		android:gravity="clip_horizontal"
+        		android:orientation="horizontal"
+        		android:paddingLeft="20dp"
+        		android:paddingRight="20dp">
+
+			 <ImageButton android:id="@+id/btn_openlmenu"
+				 android:src="@drawable/openlmenu"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:scaleX="0.55"
+				 android:scaleY="0.55"
+				 android:background="@android:color/transparent"
+				 android:layout_centerVertical="true"
+				 android:layout_alignParentStart="true" />
+
+			 <ImageButton android:id="@+id/btn_salva"
+			 			 android:src="@drawable/check"
+						 android:layout_width="wrap_content"
+           				 android:layout_height="wrap_content"
+				 		 android:scaleX="0.55"
+				 		 android:scaleY="0.55"
+           				 android:background="@android:color/transparent"
+                 android:layout_marginEnd="45dp"
+                 android:layout_alignParentBottom="true"
+                 android:layout_toStartOf="@+id/btn_cancella" />
+   			
+   			<ImageButton android:id="@+id/btn_cancella"
+			 			 android:src="@drawable/new_icon_rifiuti_home"
+						 android:layout_width="wrap_content"
+           				 android:layout_height="wrap_content"
+						 android:scaleX="0.55"
+						 android:scaleY="0.55"
+           				 android:background="@android:color/transparent"
+                android:layout_marginEnd="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/btn_annulla" />
+   			
+   			<ImageButton android:id="@+id/btn_annulla"
+			 			 android:src="@drawable/close"
+						 android:layout_width="wrap_content"
+           				 android:layout_height="wrap_content"
+				         android:scaleX="0.55"
+					     android:scaleY="0.55"
+           				 android:background="@android:color/transparent"
+						 android:layout_alignParentEnd="true"
+						 android:layout_alignTop="@+id/btn_cancella" />
+         </RelativeLayout>
+    	</LinearLayout>
+    									
+    		    <ScrollView android:layout_width="fill_parent"
+        					android:layout_height="fill_parent"
+        					android:layout_below="@+id/winktoolbar" 
+        					android:background="@color/wink_black">
+    		        
+	    		    		<RelativeLayout android:layout_width="fill_parent"
+            							    android:layout_height="wrap_content"
+            							    android:gravity="top"
+            							    android:background="@color/wink_black"
+            							    android:padding="8dp">
+            					
+	    		    		    		    <TextView android:id="@+id/labelProvincia"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:maxWidth="150dp"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_alignParentLeft="true"
+    		        	   							  android:text="Provincia"/>
+	    		    		    		    		  
+	    		    		    		    <TextView android:id="@+id/labelCap"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:maxWidth="150dp"
+    		        	   							  android:textColor="@color/label_blue"    		        	   							  
+    		        	   							  android:layout_alignParentRight="true"
+    		        	   							  android:layout_toRightOf="@+id/labelProvincia"    		        	   							     		        	   							  
+    		        	   							  android:text="Cap"/>
+	    		    		    		       		    		    		        		  
+		    		    		    		<EditText android:id="@+id/txtProvincia"
+		    		    		    		       	  android:layout_width="wrap_content" 
+	    		        	   						  android:layout_height="wrap_content"  
+	    		        	   						  android:layout_below="@+id/labelProvincia"
+	    		        	   						  android:layout_marginRight="2dp"  		        	   							  
+	    		        	   						  android:background="@drawable/edit_round_border"
+	    		        	   						  android:textColor="@color/text_white"/>
+		    		    		    				    		    		    		
+		    		    		    		<EditText android:id="@+id/txtCap"
+		    		    		    		      	  android:layout_width="wrap_content" 
+	    		        	   						  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelCap"
+    		        	   							  android:layout_toRightOf="@+id/txtProvincia"	    		        	   						  
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>		    		    		    		    														  											
+											
+	    		    		    		    <TextView android:id="@+id/labelCitta"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtProvincia"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Citta"/>
+
+	    		    		    		    <EditText android:id="@+id/txtCitta"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelCitta"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelZona"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtCitta"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Zona"/>
+
+	    		    		    		    <EditText android:id="@+id/txtZona"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelZona"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelIndirizzo"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtZona"
+    		        	   							  android:textColor="@color/verde"    		        	   							  
+    		        	   							  android:text="Indirizzo"/>
+
+	    		    		    		    <EditText android:id="@+id/txtIndirizzo"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelIndirizzo"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelPrezzo"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtIndirizzo"
+    		        	   							  android:text="Prezzo"
+    		        	   							  android:textColor="@color/label_blue"/>
+
+	    		    		    		    <EditText android:id="@+id/txtPrezzo"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelPrezzo"
+    		        	   							  android:inputType="numberDecimal"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelMq"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtPrezzo"
+    		        	   							  android:textColor="@color/label_blue"    		        	   							  
+    		        	   							  android:text="Mq"/>
+	    		    		    		    		  
+	    		    		    		    <TextView android:id="@+id/labelAnnoCostruzione"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_toRightOf="@+id/labelMq"
+    		        	   							  android:layout_below="@+id/txtPrezzo"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Anno costruzione"/>
+	    		    		    		    
+	    		    		    		    <EditText android:id="@+id/txtMq"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelMq"
+    		        	   							  android:inputType="numberDecimal"
+    		        	   							  android:layout_marginRight="2dp"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>
+		  
+	    		    		    		    <EditText android:id="@+id/txtAnnoCostruzione"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelAnnoCostruzione"
+    		        	   							  android:layout_toRightOf="@+id/txtMq"
+    		        	   							  android:inputType="number"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>
+	    		    		    		    	    		    		    		    
+
+	    		    		    		    <TextView android:id="@+id/labelDescrizione"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtAnnoCostruzione"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Descrizione"/>
+
+	    		    		    		    <EditText android:id="@+id/txtDescrizione"
+													  android:inputType="textMultiLine"
+    												  android:lines="8"
+												      android:minLines="6"
+												      android:gravity="top|left"
+												      android:maxLines="10"
+												      android:layout_height="match_parent"
+												      android:layout_width="fill_parent"
+												      android:scrollbars="vertical"
+												      android:layout_below="@+id/labelDescrizione"
+												      android:background="@drawable/edit_round_border"
+												      android:textColor="@color/text_white"/>
+	    		    		
+	    		    		    		    <TextView android:id="@+id/labelTipologia"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtDescrizione"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Tipologia"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_tipologia"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelTipologia"
+    		        	   							 android:textColor="@color/text_white"
+    		        	   							 android:background="@drawable/edit_round_border"/>	    		    		    		    	    		    		    		    
+	    		    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelStato"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/cmb_tipologia"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Stato conservativo"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_stato"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"    		        	   							 
+    		        	   							 android:layout_below="@+id/labelStato"
+    		        	   							 android:textColor="@color/text_white"
+    		        	   							 android:background="@drawable/edit_round_border"/>
+	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelClasseEnergetica"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/cmb_stato"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Classe energetica"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_classe_energetica"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelClasseEnergetica"
+    		        	   							 android:textColor="@color/text_white"
+    		        	   							 android:background="@drawable/edit_round_border"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelRiscaldamento"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/cmb_classe_energetica"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Riscaldamento"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_riscaldamento"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelRiscaldamento"
+    		        	   							 android:textColor="@color/text_white"
+    		        	   							 android:background="@drawable/edit_round_border"/>
+
+	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    
+            				</RelativeLayout>        		        
+    		    </ScrollView>
+
+</RelativeLayout>

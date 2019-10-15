@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="#000000"
+    android:paddingTop="5dp">
+    
+    <CheckBox android:id="@+id/chk_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:background="@drawable/edit_round_border"/>
+    
+    <TextView 
+        android:id="@+id/nome_import"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/chk_item"
+        android:textColor="@color/text_white"
+        android:clickable="false"
+        android:paddingLeft="10dp"/>
+    
+    <TextView 
+        android:id="@+id/data_import"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"   
+        android:layout_below="@+id/nome_import"             
+        android:layout_toRightOf="@+id/chk_item"
+        android:textColor="@color/text_white"
+        android:clickable="false"        
+        android:paddingLeft="10dp"/>
+    
+    <TextView 
+        android:id="@+id/size_import"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nome_import"                
+        android:layout_toRightOf="@+id/data_import"
+        android:textColor="@color/text_white"        
+        android:clickable="false"        
+        android:paddingLeft="10dp"/>
+    
+    
+    <ImageView android:layout_width="fill_parent"
+    		   android:layout_height="1dp"
+    		   android:layout_marginTop="5dp"
+    		   android:background="@color/label_blue"
+    		   android:layout_below="@+id/size_import"/>
+    
+</RelativeLayout>

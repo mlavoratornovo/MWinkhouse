@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_stanza_layout" 
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_popup_border"
+    android:orientation="vertical" >
+    
+    <TextView android:layout_width="wrap_content"
+    		  android:layout_height="wrap_content"
+    		  android:text="Nuova/Modifica Stanza"
+    		  android:textColor="@color/label_blue"
+    		  android:textStyle="bold"
+    		  android:textSize="20dp"
+    		  android:layout_marginRight="5dp"
+    		  android:layout_marginLeft="5dp" />
+
+	<ImageView android:layout_width="fill_parent"
+    		   android:layout_height="2dp"
+    		   android:layout_marginTop="5dp"
+    		   android:background="@color/label_blue"/>
+
+	<LinearLayout android:orientation="vertical"
+    			  android:layout_width="match_parent"
+    			  android:layout_height="wrap_content"    			  
+    			  android:paddingLeft="10dp"
+    			  android:paddingRight="10dp">
+    	
+		<TextView android:id="@+id/labelTipoStanza"
+	        	  android:layout_width="match_parent" 
+				  android:layout_height="wrap_content"
+				  android:text="Tipo stanza"
+				  android:textColor="@color/label_blue"/>
+		
+	    <Spinner android:id="@+id/cmb_tipistanze"
+	        	 android:layout_width="match_parent" 
+				 android:layout_height="wrap_content"
+	    		 android:textColor="@color/text_white"
+	    		 android:background="@drawable/edit_round_border"/>	    		    		    		    	    		    		    		    
+				 	    		    		    		    	    		    		    		   
+		
+		<TextView android:id="@+id/labelmq"
+	        	  android:layout_width="match_parent" 
+				  android:layout_height="wrap_content"
+				  android:text="Mq"
+				  android:textColor="@color/verde"/>
+				
+	    <EditText
+	        android:id="@+id/mq"
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	        android:textColor="@color/text_white"
+	        android:background="@drawable/edit_round_border"/>
+    
+    </LinearLayout>
+    
+    <RelativeLayout android:layout_width="match_parent"
+        		android:layout_height="60dp"
+        		android:layout_gravity="top|center_horizontal"
+        		android:gravity="clip_horizontal"
+        		android:orientation="horizontal"
+
+        		android:paddingLeft="40dp"
+        		android:paddingRight="40dp">
+    
+   			<ImageButton
+   			    android:id="@+id/btn_salva"
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+				android:scaleX="0.50"
+				android:scaleY="0.50"
+   			    android:background="@android:color/transparent"
+   			    android:src="@drawable/check"/>
+   			   						
+   			<ImageButton android:id="@+id/btn_chiudi"
+			 			 android:src="@drawable/close"
+						 android:layout_width="wrap_content"
+           				 android:layout_height="wrap_content"
+						 android:scaleX="0.50"
+						 android:scaleY="0.50"
+           				 android:background="@android:color/transparent"
+           				 android:layout_alignParentRight="true"/>
+        
+        
+    </RelativeLayout>
+
+</LinearLayout>

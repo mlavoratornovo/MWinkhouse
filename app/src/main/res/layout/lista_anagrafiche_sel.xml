@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_listaanagrafiche_layout" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/dialog_popup_border">
+    
+<ListView
+    android:id="@+id/listViewAnagraficheSel"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:background="@color/wink_black"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp">
+</ListView>
+    <RelativeLayout android:layout_height="50dp"
+        		android:layout_width="match_parent"
+        		android:layout_gravity="top|center_horizontal"
+        		android:gravity="clip_horizontal"
+        		android:orientation="horizontal"
+        		android:paddingTop="10dp" 
+        		android:paddingLeft="40dp"
+        		android:paddingRight="40dp">
+    
+   			<ImageButton
+   			    android:id="@+id/btn_salva"
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+				android:scaleX="0.50"
+				android:scaleY="0.50"
+				android:background="@android:color/transparent"
+   			    android:src="@drawable/check"/>
+
+   			<ImageButton android:id="@+id/btn_chiudi"
+			 			 android:src="@drawable/close"
+						 android:layout_width="wrap_content"
+           				 android:layout_height="wrap_content"
+		 				 android:scaleX="0.50"
+						 android:scaleY="0.50"
+						 android:background="@android:color/transparent"
+           				 android:layout_alignParentRight="true"/>
+        
+        
+    </RelativeLayout>
+
+</LinearLayout>

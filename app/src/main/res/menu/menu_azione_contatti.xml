@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:winkhouse="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/post_icon_" android:id="@+id/telefonata" android:title="Telefonata" winkhouse:showAsAction="ifRoom"></item>
+    <item android:icon="@drawable/new_icon_rifiuti_home" android:id="@+id/sms" android:title="SMS" winkhouse:showAsAction="ifRoom"></item>
+</menu>

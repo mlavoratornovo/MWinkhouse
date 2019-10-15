@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <ListPreference android:title="Fattore di riduzione immagini salvate"
+        			android:dialogTitle="Riduzione dimensioni in % del :"
+                    android:key="imagescale"
+                    android:defaultValue="1"
+                    android:entries="@array/scaleimageArray"
+                    android:entryValues="@array/scaleimageValues"
+                    android:summary="%s"/>
+    
+        				
+	<org.winkhouse.mwinkhouse.activity.settings.NumberPickerPreference
+	    android:title="Qualità immagini salvate"
+	    android:dialogTitle="0 min 100 max"
+        android:key="imagequality"        
+        android:defaultValue="100" />
+
+	<PreferenceCategory
+		android:title="Ricerca Cloud"
+		android:key="pref_key_storage_settings">
+
+		<EditTextPreference android:title="Intervallo di controllo"
+			android:summary="numero secondi di attesa"
+			android:key="cloudpolling"
+			android:defaultValue="30"
+			android:inputType="number">
+		</EditTextPreference>
+
+		<ListPreference android:title="Canale di ricerca cloud"
+			android:dialogTitle="Selezione del canale di trasmissione dati :"
+			android:key="cloudchannel"
+			android:defaultValue="1"
+			android:entries="@array/cloudchannelArray"
+			android:entryValues="@array/cloudchannelValues"
+			android:summary="%s"/>
+
+		<ListPreference android:title="Metodo aggiornamento dati"
+			android:dialogTitle="Metodo di aggiornamento dei dati locali :"
+			android:key="updatemode"
+			android:defaultValue="1"
+			android:entries="@array/updatemodeArray"
+			android:entryValues="@array/updatemodeValues"
+			android:summary="%s"/>
+
+		<PreferenceScreen
+			android:key="ftp"
+			android:title="FTP"
+			android:persistent="false">
+
+			<EditTextPreference android:title="Url ftp"
+				android:summary="inserire url ftp"
+				android:key="ftpurl">
+			</EditTextPreference>
+
+			<EditTextPreference android:title="percorso ftp"
+				android:summary="inserire percorso aggiuntivo"
+				android:key="ftppath">
+			</EditTextPreference>
+
+			<EditTextPreference android:title="Porta ftp"
+				android:summary="inserire porta ftp"
+				android:key="ftpporta"
+				android:inputType="number">
+			</EditTextPreference>
+
+			<EditTextPreference android:title="username ftp"
+				android:summary="inserire username ftp"
+				android:key="ftpusername">
+			</EditTextPreference>
+
+			<EditTextPreference android:title="password ftp"
+				android:summary="inserire password ftp"
+				android:key="ftppassword"
+				android:inputType="textPassword">
+			</EditTextPreference>
+
+		</PreferenceScreen>
+        <PreferenceScreen
+            android:key="winkcloud"
+            android:title="WINKCLOUDQUERY"
+            android:persistent="false">
+
+        <EditTextPreference android:title="Url winkcloudquery"
+                            android:summary="inserire url winkcloudquery"
+                            android:key="winkcloudurl">
+        </EditTextPreference>
+        <EditTextPreference android:title="winkcloud ID"
+                            android:summary="inserire ID winkcloud"
+                            android:key="winkcloudurlid">
+
+        </EditTextPreference>
+        </PreferenceScreen>
+
+	</PreferenceCategory>
+
+</PreferenceScreen>

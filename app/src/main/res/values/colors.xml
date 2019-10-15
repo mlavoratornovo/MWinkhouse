@@ -1,0 +1,11 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="verde">#2dd60c</color>
+	<color name="label_blue">#4ec7f4</color>
+	<color name="text_white">#FFFFFF</color>
+	<color name="wink_grey">#4f4f4f</color>
+	<color name="wink_grey_light">#f1ebeb</color>
+	<color name="wink_black">#000000</color>
+	<color name="wink_black_20op">#330000</color>
+</resources>

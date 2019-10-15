@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_laterale_dettaglio_immobile">        
+        <item>Extra info</item>
+        <item>Stanze</item>
+        <item>Colloqui</item>
+    </string-array>
+</resources>

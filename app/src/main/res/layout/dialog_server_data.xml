@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_serveripport_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_popup_border">
+    
+    <TextView android:layout_width="wrap_content"
+    		  android:layout_height="wrap_content"
+    		  android:text="Indirizzo winkhouse"
+    		  android:textColor="@color/label_blue"
+    		  android:textStyle="bold"
+    		  android:textSize="20dp"
+    		  android:layout_marginRight="5dp"
+    		  android:layout_marginLeft="5dp" />
+
+	<ImageView android:layout_width="fill_parent"
+    		   android:layout_height="2dp"
+    		   android:layout_marginTop="5dp"
+    		   android:background="@color/label_blue"/>
+    
+	<LinearLayout android:orientation="vertical"
+    			  android:layout_width="match_parent"
+    			  android:layout_height="wrap_content"    			  
+    			  android:paddingLeft="10dp"
+    			  android:paddingRight="10dp">
+			
+			<TextView android:id="@+id/labelServerIp"
+		        	  android:layout_width="match_parent" 
+					  android:layout_height="wrap_content"
+					  android:text="IP Winkhuose"
+					  android:textColor="@color/label_blue"/>
+			
+		    <EditText android:id="@+id/ipWinkhouse"
+		        	  android:layout_width="match_parent"
+		        	  android:layout_height="30dp"
+		        	  android:textColor="@color/text_white"
+			          android:background="@drawable/edit_round_border"/>		
+			
+			<TextView android:id="@+id/labelPorta"
+		        	  android:layout_width="match_parent" 
+					  android:layout_height="wrap_content"
+					  android:text="Porta di ascolto"
+					  android:textColor="@color/label_blue"/>
+					
+		    <EditText
+		        android:id="@+id/porta"
+		        android:layout_width="match_parent"
+		        android:layout_height="30dp"
+		        android:textColor="@color/text_white"    	
+			    android:background="@drawable/edit_round_border"/>		
+	
+	</LinearLayout>
+		    
+    <RelativeLayout android:layout_width="match_parent"
+        		android:layout_height="50dp"
+        		android:layout_gravity="top|center_horizontal"
+        		android:gravity="clip_horizontal"
+        		android:orientation="horizontal"
+        		android:paddingTop="10dp" 
+        		android:paddingLeft="40dp"
+        		android:paddingRight="40dp">
+    
+   			<ImageButton
+   			    android:id="@+id/btn_salva"
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+   			    android:background="@android:color/transparent"
+   			    android:src="@drawable/check"/>
+   			
+   			<ImageButton android:id="@+id/btn_chiudi"
+			 			 android:src="@drawable/close"
+						 android:layout_width="wrap_content"
+           				 android:layout_height="wrap_content"
+           				 android:background="@android:color/transparent"
+           				 android:layout_alignParentRight="true"/>
+        
+        
+    </RelativeLayout>
+    
+    
+</LinearLayout>

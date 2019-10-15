@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="scaleimageArray">
+		<item>0</item>
+		<item>25</item>
+		<item>50</item>
+		<item>75</item>		
+	</string-array>
+	<string-array name="scaleimageValues">
+    	<item>0</item>
+    	<item>0.75</item>
+    	<item>0.5</item>
+    	<item>0.25</item>
+	</string-array>
+	<string-array name="tipocolloquioArray">
+    	<item>generico</item>
+    	<item>visita</item>
+	</string-array>
+	<string-array name="tipocolloquioValues">
+    	<item>3</item>
+    	<item>2</item>
+	</string-array>
+	<string-array name="cloudchannelArray">
+		<item>ftp</item>
+		<item>winkcloud</item>
+	</string-array>
+	<string-array name="cloudchannelValues">
+		<item>ftp</item>
+		<item>winkcloud</item>
+	</string-array>
+	<string-array name="updatemodeArray">
+		<item>sovrascrivi</item>
+		<item>aggiungi</item>
+		<item>aggiorna</item>
+	</string-array>
+	<string-array name="updatemodeValues">
+		<item>sovrascrivi</item>
+		<item>aggiungi</item>
+		<item>aggiorna</item>
+	</string-array>
+
+</resources>

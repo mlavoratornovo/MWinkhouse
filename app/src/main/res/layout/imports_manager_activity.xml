@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_serveripport_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/wink_black">
+    		    
+    
+	<LinearLayout 	android:orientation="horizontal"
+    				android:layout_width="match_parent"
+    				android:layout_height="wrap_content">
+										
+    	<RelativeLayout android:layout_width="match_parent"
+        				android:layout_height="60dp"
+        				android:layout_gravity="top|center_horizontal"
+        				android:gravity="clip_horizontal"
+        				android:orientation="horizontal"
+        				android:paddingTop="10dp" 
+        				android:paddingLeft="40dp"
+        				android:paddingRight="40dp">
+    
+				<ImageButton android:id="@+id/btn_importa"    
+ 						     android:src="@drawable/ic_get_app_white_48dp"
+				             android:layout_width="wrap_content"
+							 android:layout_height="wrap_content"
+							 android:scaleX="0.6"
+							 android:scaleY="0.6"
+							 android:background="@android:color/transparent"
+							 android:layout_alignParentLeft="true"/>
+    			    			
+    			<ImageButton android:id="@+id/btn_cancella"
+ 						     android:src="@drawable/new_icon_rifiuti_home"
+				             android:layout_width="wrap_content"
+							 android:layout_height="wrap_content"
+							 android:scaleX="0.6"
+							 android:scaleY="0.6"
+							 android:background="@android:color/transparent"
+							 android:layout_alignParentRight="true"/>            
+            
+    	</RelativeLayout>
+    	
+	</LinearLayout>    
+	
+	<LinearLayout 	android:orientation="vertical"
+    				android:layout_width="match_parent"
+    				android:layout_height="wrap_content"
+    				android:paddingLeft="10dp"
+    				android:paddingTop="10dp"
+    				android:paddingRight="10dp">
+
+	    <TextView android:id="@+id/top_label"
+		       	  android:layout_width="match_parent" 
+				  android:layout_height="wrap_content"
+				  android:text=""
+				  android:textColor="@color/label_blue"
+				  android:paddingBottom="5dp"/>
+	    
+	    			
+	    <ProgressBar android:id="@+id/top_progress"
+	         		 android:layout_width="fill_parent"
+	         		 android:layout_height="wrap_content"	         		 
+	         		 style="@style/CustomProgressBar" 
+	         		 android:layout_marginRight="5dp" />
+	    
+	    <TextView	android:id="@+id/top_text"
+	        		android:textColor="@color/text_white"
+	        		android:layout_width="wrap_content"
+	         		android:layout_height="wrap_content"/>
+	    
+ 	</LinearLayout>
+ 	
+ 	
+ 	<ListView android:id="@+id/listaImports"
+    		  android:layout_width="fill_parent"
+    		  android:layout_height="wrap_content" 
+    		  android:background="@color/wink_black">
+	</ListView>
+</LinearLayout>

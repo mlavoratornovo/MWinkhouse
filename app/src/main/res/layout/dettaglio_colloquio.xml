@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    		    android:layout_width="fill_parent" 
+    		    android:layout_height="fill_parent"> 
+    		    
+     <LinearLayout
+            android:id="@+id/winktoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="top|center_horizontal"
+            android:background="#000000"
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
+
+		 <RelativeLayout android:layout_width="match_parent"
+			 android:layout_height="49dp"
+			 android:layout_gravity="top|center_horizontal"
+			 android:gravity="clip_horizontal"
+			 android:orientation="horizontal"
+			 android:paddingLeft="20dp"
+			 android:paddingRight="20dp">
+
+			 <ImageButton android:id="@+id/btn_openlmenu"
+				 android:src="@drawable/openlmenu"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:scaleX="0.55"
+				 android:scaleY="0.55"
+				 android:background="@android:color/transparent"
+				 android:layout_centerVertical="true"
+				 android:layout_alignParentStart="true" />
+
+			 <ImageButton android:id="@+id/btn_salva"
+				 android:src="@drawable/check"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:scaleX="0.55"
+				 android:scaleY="0.55"
+				 android:background="@android:color/transparent"
+				 android:layout_marginEnd="45dp"
+				 android:layout_alignParentBottom="true"
+				 android:layout_toStartOf="@+id/btn_cancella" />
+
+			 <ImageButton android:id="@+id/btn_cancella"
+				 android:src="@drawable/new_icon_rifiuti_home"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:scaleX="0.55"
+				 android:scaleY="0.55"
+				 android:background="@android:color/transparent"
+				 android:layout_marginEnd="45dp"
+				 android:layout_alignParentTop="true"
+				 android:layout_toStartOf="@+id/btn_annulla" />
+
+			 <ImageButton android:id="@+id/btn_annulla"
+				 android:src="@drawable/close"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:scaleX="0.55"
+				 android:scaleY="0.55"
+				 android:background="@android:color/transparent"
+				 android:layout_alignParentEnd="true"
+				 android:layout_alignTop="@+id/btn_cancella" />
+
+		 </RelativeLayout>
+         
+    </LinearLayout>
+    									
+    		    <ScrollView android:layout_width="fill_parent"
+        					android:layout_height="fill_parent"
+        					android:layout_below="@+id/winktoolbar" 
+        					android:background="@color/wink_black">
+    		        
+	    		    		<RelativeLayout android:layout_width="fill_parent"
+            							    android:layout_height="wrap_content"
+            							    android:gravity="top"
+            							    android:background="@color/wink_black"
+            							    android:padding="8dp">
+   			
+	    		    		    		    <TextView android:id="@+id/labelData"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"    		        	   							  
+    		        	   							  android:textColor="@color/verde"
+    		        	   							  android:maxWidth="150dp"
+    		        	   							  android:layout_alignParentLeft="true"
+    		        	   							  android:text="Data"/>
+	    		    		    		    		  
+	    		    		    		    <TextView android:id="@+id/labelOra"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"    		        	   							  
+    		        	   							  android:textColor="@color/verde"    		        	   							  
+    		        	   							  android:layout_alignParentRight="true"
+    		        	   							  android:maxWidth="150dp"
+    		        	   							  android:layout_toRightOf="@+id/labelData"    		        	   							     		        	   							  
+    		        	   							  android:text="Ora"/>
+	    		    		    		       		    		    		        		  
+		    		    		    		<EditText android:id="@+id/txtData"
+		    		    		    		       	  android:layout_width="wrap_content" 
+	    		        	   						  android:layout_height="wrap_content"  
+	    		        	   						  android:layout_below="@+id/labelData"
+	    		        	   						  android:layout_marginRight="2dp"  		        	   							  
+	    		        	   						  android:background="@drawable/edit_round_border"
+	    		        	   						  android:textColor="@color/text_white"
+	    		        	   						  android:editable="false"/>
+		    		    		    				    		    		    		
+		    		    		    		<EditText android:id="@+id/txtOra"
+		    		    		    		      	  android:layout_width="wrap_content" 
+	    		        	   						  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelOra"
+    		        	   							  android:layout_toRightOf="@+id/txtData"	    		        	   						  
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"
+													  android:editable="false"/>		    		    		    		    														  											
+	    		    		    	    		    		    		    		    		    		
+	    		    		    			    
+	    		    		    			<TextView android:id="@+id/labelTipoColloquio"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtData"
+    		        	   							  android:text="Tipologia"
+    		        	   							  android:textColor="@color/verde"/>
+											
+	    		    		    		    <Spinner android:id="@+id/cmb_TipoColloquio"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelTipoColloquio"
+    		        	   							 android:background="@drawable/edit_round_border"/>	    		    		    		    	    		    		    		    
+
+	    		    		    		   		    		    		    		   		    		    		    		   	
+	    		    		    		    <TextView android:id="@+id/labelDescrizione"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/cmb_TipoColloquio"
+    		        	   							  android:text="Descrizione"
+    		        	   							  android:textColor="@color/label_blue"/>
+
+	    		    		    		    <EditText android:id="@+id/txtDescrizione"
+													  android:inputType="textMultiLine"
+    												  android:lines="8"
+												      android:minLines="6"
+												      android:gravity="top|left"
+												      android:maxLines="10"
+												      android:layout_height="match_parent"
+												      android:layout_width="fill_parent"
+												      android:scrollbars="vertical"
+												      android:layout_below="@+id/labelDescrizione"
+												      android:background="@drawable/edit_round_border"
+												      android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelAgenzia"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtDescrizione"
+    		        	   							  android:text="Agenzia"
+    		        	   							  android:textColor="@color/label_blue"/>
+
+	    		    		    		    <EditText android:id="@+id/txtAgenzia"
+													  android:inputType="textMultiLine"
+    												  android:lines="8"
+												      android:minLines="6"
+												      android:gravity="top|left"
+												      android:maxLines="10"
+												      android:layout_height="match_parent"
+												      android:layout_width="fill_parent"
+												      android:scrollbars="vertical"
+												      android:layout_below="@+id/labelAgenzia"
+												      android:background="@drawable/edit_round_border"
+												      android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelCliente"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtAgenzia"
+    		        	   							  android:text="Cliente"
+    		        	   							  android:textColor="@color/label_blue"/>
+
+	    		    		    		    <EditText android:id="@+id/txtCliente"
+													  android:inputType="textMultiLine"
+    												  android:lines="8"
+												      android:minLines="6"
+												      android:gravity="top|left"
+												      android:maxLines="10"
+												      android:layout_height="match_parent"
+												      android:layout_width="fill_parent"
+												      android:scrollbars="vertical"
+												      android:layout_below="@+id/labelCliente"
+												      android:background="@drawable/edit_round_border"
+												      android:textColor="@color/text_white"/>
+	    		    		    		    	    		    		    		    
+	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    
+            				</RelativeLayout>
+            	</ScrollView>
+    
+
+</RelativeLayout>

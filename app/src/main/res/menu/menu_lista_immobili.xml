@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:winkhouse="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/post_icon_" android:id="@+id/nuovo_immobile" android:title="Nuovo" winkhouse:showAsAction="ifRoom"></item>
+    <item android:icon="@drawable/new_icon_rifiuti_home" android:id="@+id/cancella_immobile" android:title="Cancella" winkhouse:showAsAction="ifRoom"></item>
+    <item android:icon="@drawable/lens_icon" android:id="@+id/ricerca_immobile" android:title="Ricerca" winkhouse:showAsAction="ifRoom"></item>    	
+</menu>

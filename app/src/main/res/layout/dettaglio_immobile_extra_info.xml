@@ -1,0 +1,129 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    		    android:layout_width="fill_parent" 
+    		    android:layout_height="fill_parent"> 
+    		        									
+    		    <ScrollView android:layout_width="fill_parent"
+        					android:layout_height="fill_parent"
+        					android:layout_below="@+id/winktoolbar" 
+        					android:background="@color/wink_black">
+    		        
+	    		    		<RelativeLayout android:layout_width="fill_parent"
+            							    android:layout_height="wrap_content"
+            							    android:gravity="top"
+            							    android:background="@color/wink_black"
+            							    android:padding="8dp">
+            					
+	    		    		    		    <TextView android:id="@+id/labelMutuo"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:maxWidth="150dp"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_alignParentLeft="true"
+    		        	   							  android:text="Mutuo"/>
+	    		    		    		    		  
+	    		    		    		    <TextView android:id="@+id/labelSpese"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:maxWidth="150dp"
+    		        	   							  android:textColor="@color/label_blue"    		        	   							  
+    		        	   							  android:layout_alignParentRight="true"
+    		        	   							  android:layout_toRightOf="@+id/labelMutuo"    		        	   							     		        	   							  
+    		        	   							  android:text="Spese"/>
+	    		    		    		       		    		    		        		  
+		    		    		    		<EditText android:id="@+id/txtMutuo"
+		    		    		    		       	  android:layout_width="wrap_content" 
+	    		        	   						  android:layout_height="wrap_content"  
+	    		        	   						  android:layout_below="@+id/labelMutuo"
+	    		        	   						  android:layout_marginRight="2dp"  		        	   							  
+	    		        	   						  android:background="@drawable/edit_round_border"
+	    		        	   						  android:digits="0123456789."
+													  android:inputType="numberDecimal"
+	    		        	   						  android:textColor="@color/text_white"/>
+		    		    		    				    		    		    		
+		    		    		    		<EditText android:id="@+id/txtSpese"
+		    		    		    		      	  android:layout_width="wrap_content" 
+	    		        	   						  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelSpese"
+    		        	   							  android:layout_toRightOf="@+id/txtMutuo"	    		        	   						  
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"
+													  android:digits="0123456789."
+													  android:inputType="numberDecimal"/>		    		    		    		    														  											
+											
+	    		    		    		    <TextView android:id="@+id/labelVisionabile"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtMutuo"
+    		        	   							  android:layout_alignParentLeft="true"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Visionabile"/>
+
+	    		    		    		    <TextView android:id="@+id/labelAffittabile"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"    		        	   							  
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_below="@+id/txtMutuo"    		        	   							  
+    		        	   							  android:layout_alignParentRight="true"
+    		        	   							  android:layout_toRightOf="@+id/labelVisionabile"    		        	   							     		        	   							  
+    		        	   							  android:text="Affittabile"/>
+	    		    		    		    
+
+	    		    		    		    <CheckBox android:id="@+id/chkVisionabile"
+	    		    		    		    	      android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_alignParentLeft="true"
+    		        	   							  android:layout_below="@+id/labelVisionabile"
+    		        	   							  
+    		        	   							  android:onClick="setVisionabile"/>
+
+	    		    		    		    <CheckBox android:id="@+id/chkAffittabile"
+	    		    		    		    	      android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_toRightOf="@+id/chkVisionabile"
+    		        	   							  android:layout_below="@+id/labelAffittabile"
+    		        	   							  
+    		        	   							  android:onClick="setAffittabile"/>
+ 	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelDesAgenzia"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/chkVisionabile"
+    		        	   							  android:textColor="@color/label_blue"    		  
+    		        	   							  android:background="@drawable/edit_round_border"      	   							  
+    		        	   							  android:text="Note agenzia"/>
+
+	    		    		    		    <EditText android:id="@+id/txtDesAgenzia"
+    												  android:lines="8"
+												      android:minLines="6"
+												      android:gravity="top|left"
+												      android:maxLines="10"
+												      android:layout_height="match_parent"
+												      android:layout_width="fill_parent"
+												      android:scrollbars="vertical"    		        	   							  
+    		        	   							  android:layout_below="@+id/labelDesAgenzia"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelDesMutuo"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtDesAgenzia"
+    		        	   							  android:text="Note mutuo"
+    		        	   							  android:textColor="@color/label_blue"/>
+
+	    		    		    		    <EditText android:id="@+id/txtDesMutuo"
+    												  android:lines="8"
+												      android:minLines="6"
+												      android:gravity="top|left"
+												      android:maxLines="10"
+												      android:layout_height="match_parent"
+												      android:layout_width="fill_parent"
+												      android:scrollbars="vertical"
+    		        	   							  android:layout_below="@+id/labelDesMutuo"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>	    		    		    		    
+	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    
+            				</RelativeLayout>        		        
+    		    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,4 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:winkhouse="http://schemas.android.com/apk/res-auto">        
+        <item android:icon="@drawable/esportazionewireless" android:id="@+id/EsportaWireless" android:title="Esporta wireless" winkhouse:showAsAction="ifRoom"></item>
+    </menu>

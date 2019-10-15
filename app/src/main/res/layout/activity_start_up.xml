@@ -1,0 +1,99 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:background="#ffffff"
+             tools:context=".StartUpActivity">
+
+    <!--
+         The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc.
+    -->
+
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:keepScreenOn="true"        
+        android:textColor="#000000"
+        android:textColorLink="#FFFFFF"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+	    	    
+    <!--
+         This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows.
+    -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="#ffffff"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:weightSum="1">
+
+
+            <ImageButton
+                android:id="@+id/btn_immobili"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:adjustViewBounds="false"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:src="@drawable/gohomebutton" />
+
+            <ImageButton
+                android:id="@+id/btn_base"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:adjustViewBounds="false"
+                android:background="#ffffff"
+                android:src="@drawable/datibasebutton" />
+
+            <ImageButton
+                android:id="@+id/btn_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:adjustViewBounds="false"
+                android:background="#ffffff"
+                android:cropToPadding="false"
+                android:elevation="0dp"
+                android:src="@drawable/settings" />
+
+
+            <ImageButton
+                android:id="@+id/btn_anagrafiche"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:adjustViewBounds="false"
+                android:background="#ffffff"
+                android:cropToPadding="false"
+                android:src="@drawable/anagraficabutton"
+                android:layout_weight="0.19" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

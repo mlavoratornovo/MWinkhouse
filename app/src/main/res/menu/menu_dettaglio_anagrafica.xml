@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:winkhouse="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/contatti" android:id="@+id/contatti" android:title="Contatti" winkhouse:showAsAction="ifRoom"></item>
+    <item android:icon="@drawable/gohome" android:id="@+id/immobili_anagrafica" android:title="Immobili" winkhouse:showAsAction="ifRoom"></item>
+    <item android:icon="@drawable/globe_icon_white" android:id="@+id/mappa" android:title="Mappa" winkhouse:showAsAction="ifRoom"></item>    	        
+</menu>

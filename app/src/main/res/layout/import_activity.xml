@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_serveripport_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/wink_black">
+    		    
+    
+	<LinearLayout android:orientation="vertical"
+    			  android:layout_width="match_parent"
+    			  android:layout_height="wrap_content"    			  
+    			  android:paddingLeft="10dp"
+    			  android:paddingRight="10dp">
+			
+			<TextView android:id="@+id/labelServerIp"
+		        	  android:layout_width="match_parent" 
+					  android:layout_height="wrap_content"
+					  android:text="IP Winkhuose"
+					  android:textColor="@color/label_blue"/>
+			
+		    <EditText android:id="@+id/ipWinkhouse"
+		        	  android:layout_width="match_parent"
+		        	  android:layout_height="30dp"
+		        	  android:textColor="@color/text_white"
+			          android:background="@drawable/edit_round_border"/>		
+			
+			<TextView android:id="@+id/labelPorta"
+		        	  android:layout_width="match_parent" 
+					  android:layout_height="wrap_content"
+					  android:text="Porta di ascolto"
+					  android:textColor="@color/label_blue"/>
+					
+		    <EditText
+		        android:id="@+id/porta"
+		        android:layout_width="match_parent"
+		        android:layout_height="30dp"
+		        android:textColor="@color/text_white"    	
+			    android:background="@drawable/edit_round_border"/>		
+	
+	</LinearLayout>
+	<LinearLayout 	android:orientation="horizontal"
+    				android:layout_width="match_parent"
+    				android:layout_height="wrap_content">
+										
+        <RelativeLayout android:layout_width="match_parent"
+        		android:layout_height="60dp"
+        		android:layout_gravity="top|center_horizontal"
+        		android:gravity="clip_horizontal"
+        		android:orientation="horizontal"
+        		android:paddingTop="10dp" 
+        		android:paddingLeft="40dp"
+        		android:paddingRight="40dp">
+    
+   			<ImageButton
+   			    android:id="@+id/btn_salva"
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+				android:scaleX="0.5"
+				android:scaleY="0.5"
+   			    android:background="@android:color/transparent"
+   			    android:src="@drawable/check"/>
+   			
+   			<ImageButton android:id="@+id/btn_chiudi"
+			 			 android:src="@drawable/close"
+						 android:layout_width="wrap_content"
+           				 android:layout_height="wrap_content"
+		 				 android:scaleX="0.5"
+						 android:scaleY="0.5"
+           				 android:background="@android:color/transparent"
+           				 android:layout_alignParentRight="true"/>
+        
+    
+    </RelativeLayout>
+	</LinearLayout>    
+	<LinearLayout 	android:orientation="vertical"
+    				android:layout_width="match_parent"
+    				android:layout_height="wrap_content"
+    				android:paddingLeft="10dp"
+    				android:paddingTop="10dp"
+    				android:paddingRight="10dp">
+
+	    <TextView android:id="@+id/top_label"
+		       	  android:layout_width="match_parent" 
+				  android:layout_height="wrap_content"
+				  android:text=""
+				  android:textColor="@color/label_blue"
+				  android:paddingBottom="5dp"/>
+	    
+	    			
+	    <ProgressBar android:id="@+id/top_progress"
+	         		 android:layout_width="fill_parent"
+	         		 android:layout_height="wrap_content"	         		 
+	         		 style="@style/CustomProgressBar" 
+	         		 android:layout_marginRight="5dp" />
+	    
+	    <TextView	android:id="@+id/top_text"
+	        		android:textColor="@color/text_white"
+	        		android:layout_width="wrap_content"
+	         		android:layout_height="wrap_content"/>
+	    
+ 	</LinearLayout>
+ 	
+	<LinearLayout 	android:orientation="vertical"
+    				android:layout_width="match_parent"
+    				android:layout_height="wrap_content"
+    				android:paddingLeft="10dp"
+    				android:paddingTop="10dp"    				
+    				android:paddingRight="10dp">
+
+	    <TextView android:id="@+id/bottom_label"
+		       	  android:layout_width="match_parent" 
+				  android:layout_height="wrap_content"
+				  android:text=""
+				  android:textColor="@color/label_blue"
+				  android:paddingBottom="5dp"/>
+	    	    	    			
+	    <ProgressBar android:id="@+id/bottom_progress"
+	         		 android:layout_width="fill_parent"
+	         		 android:layout_height="wrap_content"
+	         		 style="@style/CustomProgressBar" 
+	         		 android:layout_marginRight="5dp" />
+	    
+	    <TextView	android:id="@+id/bottom_text"
+	        		android:textColor="@color/text_white"
+	        		android:layout_width="wrap_content"
+	         		android:layout_height="wrap_content"/>
+	    
+ 	</LinearLayout>
+ 	
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_laterale_dettaglio_anagrafica">
+        <item>Colloqui</item>
+    </string-array>
+</resources>

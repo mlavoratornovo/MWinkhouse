@@ -1,0 +1,191 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    		    android:layout_width="fill_parent" 
+    		    android:layout_height="fill_parent"
+    		    android:background="@color/wink_black"
+    		    android:paddingTop="5dp">
+    		     
+    		    <LinearLayout android:id="@+id/winktoolbar"
+				              style="?buttonBarStyle"
+				              android:layout_width="fill_parent"
+				              android:layout_height="60dp"
+				              android:layout_gravity="top|center_horizontal"
+				              android:background="#000000"
+				              android:orientation="horizontal"
+				              android:paddingTop="5dp">
+
+					<RelativeLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:layout_gravity="top|center_horizontal"
+						android:gravity="clip_horizontal"
+						android:orientation="horizontal"
+						android:paddingLeft="40dp"
+						android:paddingRight="40dp"
+						android:paddingTop="5dp">
+
+						<ImageButton
+							android:id="@+id/btn_ricerca_immobili"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentLeft="true"
+							android:scaleX="0.65"
+							android:scaleY="0.65"
+							android:background="@android:color/transparent"
+							android:src="@drawable/lens_icon_48" />
+
+						<ImageButton
+							android:id="@+id/btn_ricerca_immobili_cloud"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:scaleX="0.65"
+							android:scaleY="0.65"
+							android:layout_alignParentRight="true"
+							android:background="@android:color/transparent"
+							android:src="@drawable/globe_icon_white_web" />
+					</RelativeLayout>
+
+				</LinearLayout>
+    									
+    		    <ScrollView android:layout_width="fill_parent"
+        					android:layout_height="fill_parent"
+        					android:layout_below="@+id/winktoolbar" 
+        					android:background="@color/wink_black">
+    		        
+	    		    		<RelativeLayout android:layout_width="fill_parent"
+            							    android:layout_height="wrap_content"
+            							    android:gravity="top"
+            							    android:background="@color/wink_black"
+            							    android:padding="8dp">            					
+
+	    		    		    		    <TextView android:id="@+id/labelRCitta"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:text="Citta"/>
+
+	    		    		    		    <EditText android:id="@+id/txtRCitta"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:layout_below="@+id/labelRCitta"
+    		        	   							  android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelRZona"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_below="@+id/txtRCitta"
+    		        	   							  android:text="Zona"/>
+
+	    		    		    		    <EditText android:id="@+id/txtRZona"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:background="@drawable/edit_round_border"    		        	   							  
+    		        	   							  android:layout_below="@+id/labelRZona"
+    		        	   							  android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelRIndirizzo"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_below="@+id/txtRZona"
+    		        	   							  android:text="Indirizzo"/>
+
+	    		    		    		    <EditText android:id="@+id/txtRIndirizzo"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelRIndirizzo"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelRMqDa"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_below="@+id/txtRIndirizzo"
+    		        	   							  android:text="Da mq"/>
+	    		    		    		    		  
+	    		    		    		    <TextView android:id="@+id/labelRMqA"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_toRightOf="@+id/labelRMqDa"
+    		        	   							  android:layout_below="@+id/txtRIndirizzo"
+    		        	   							  android:text="A mq"/>
+	    		    		    		    
+	    		    		    		    <EditText android:id="@+id/txtRMqDa"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_marginRight="2dp"
+    		        	   							  android:layout_below="@+id/labelRMqDa"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+		  
+	    		    		    		    <EditText android:id="@+id/txtRMqA"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelRMqDa"
+    		        	   							  android:layout_toRightOf="@+id/txtRMqDa"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>	    		    		    		    	    		    		    		    
+	    		    		
+	    		    		    		    <TextView android:id="@+id/labelRTipologia"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_below="@+id/txtRMqDa"
+    		        	   							  android:text="Tipologia"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_Rtipologia"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelRTipologia"
+    		        	   							 android:textColor="@color/text_white"
+    		        	   							 android:background="@drawable/edit_round_border"/>	    		    		    		    	    		    		    		    
+	    		    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelRStato"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_below="@+id/cmb_Rtipologia"
+    		        	   							  android:text="Stato conservativo"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_Rstato"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelRStato"
+    		        	   							 android:textColor="@color/text_white"
+    		        	   							 android:background="@drawable/edit_round_border"/>
+	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelRClasseEnergetica"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_below="@+id/cmb_Rstato"
+    		        	   							  android:text="Classe energetica"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_Rclasse_energetica"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelRClasseEnergetica"
+    		        	   							 android:textColor="@color/text_white"
+    		        	   							 android:background="@drawable/edit_round_border"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelRRiscaldamento"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:textColor="@color/label_blue"
+    		        	   							  android:layout_below="@+id/cmb_Rclasse_energetica"
+    		        	   							  android:text="Riscaldamento"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_Rriscaldamento"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelRRiscaldamento"
+    		        	   							 android:textColor="@color/text_white"
+    		        	   							 android:background="@drawable/edit_round_border"/>
+	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    
+            				</RelativeLayout>        		        
+    		    </ScrollView>
+
+</RelativeLayout>

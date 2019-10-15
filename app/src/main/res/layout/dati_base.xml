@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" 
+    android:background="@color/wink_black">
+    
+    <ScrollView android:layout_width="fill_parent"
+    			android:layout_height="fill_parent"
+    			android:layout_below="@+id/winktoolbar" 
+    			android:background="@color/wink_black">
+    	
+            
+    		<RelativeLayout android:layout_width="fill_parent"
+						    android:layout_height="wrap_content"
+    					    android:gravity="top"
+    					    android:background="@color/wink_black"
+    					    android:padding="8dp">
+     							    
+            	<TextView android:id="@+id/labelTipologiaImmobile"
+	    		      	  android:layout_width="wrap_content" 
+    		          	  android:layout_height="wrap_content"
+    		          	  android:maxWidth="150dp"
+    		          	  android:textColor="@color/label_blue"
+    		          	  android:layout_alignParentLeft="true"
+    		          	  android:text="Tipologie immobili"/>
+            	    		    			      		    
+		    	<Spinner android:id="@+id/cmb_tipologia_immobili"
+	   		        	 android:layout_width="match_parent" 
+		   				 android:layout_height="wrap_content"
+		   				 android:layout_below="@+id/labelTipologiaImmobile"
+		   				 android:textColor="@color/text_white"
+		   				 android:background="@drawable/edit_round_border"/>
+		    	
+        					  
+				<RelativeLayout android:id="@+id/winktoolbar_tipo_immobili"
+				    			android:layout_width="match_parent"
+				        		android:layout_height="60dp"
+				        		android:layout_gravity="top|center_horizontal"
+				        		android:layout_below="@+id/cmb_tipologia_immobili"
+				        		android:gravity="clip_horizontal"
+				        		android:orientation="horizontal"
+				        		android:paddingLeft="40dp"
+				        		android:paddingRight="40dp">				    
+				        		
+				    			<ImageButton android:id="@+id/btn_new_tipo"    
+				 						     android:src="@drawable/post_icon_"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+											 android:scaleX="0.50"
+											 android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentLeft="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_edit_tipo"
+				 						     android:src="@drawable/edit_item"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_centerInParent="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_del_tipo"
+				 						     android:src="@drawable/new_icon_rifiuti_home"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentRight="true"/>
+		    	</RelativeLayout>		    	
+		    	
+	   		    <TextView android:id="@+id/labelStato"
+	   		        	  android:layout_width="match_parent" 
+		   				  android:layout_height="wrap_content"
+		   				  android:layout_below="@+id/winktoolbar_tipo_immobili"
+		   				  android:textColor="@color/label_blue"
+		   				  android:text="Stato conservativo"/>
+	   		    
+	   		    <Spinner android:id="@+id/cmb_stato"
+	   		        	 android:layout_width="match_parent" 
+		   				 android:layout_height="wrap_content"    		        	   							 
+		   				 android:layout_below="@+id/labelStato"
+		   				 android:textColor="@color/text_white"
+		   				 android:background="@drawable/edit_round_border"/>
+
+   				<RelativeLayout android:id="@+id/winktoolbar_stato_immobili"
+				    			android:layout_width="match_parent"
+				        		android:layout_height="60dp"
+				        		android:layout_gravity="top|center_horizontal"
+				        		android:layout_below="@+id/cmb_stato"
+				        		android:gravity="clip_horizontal"
+				        		android:orientation="horizontal"
+				        		android:paddingLeft="40dp"
+				        		android:paddingRight="40dp">				    
+				        		
+				    			<ImageButton android:id="@+id/btn_new_stato"    
+				 						     android:src="@drawable/post_icon_"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentLeft="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_edit_stato"
+				 						     android:src="@drawable/edit_item"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_centerInParent="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_del_stato"
+				 						     android:src="@drawable/new_icon_rifiuti_home"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentRight="true"/>
+		    	</RelativeLayout>		    	
+	   		    	   		    
+	   		    	   		    	    		    		    		    	    		    		    		    	    		    		    		    
+	   		    <TextView android:id="@+id/labelClasseEnergetica"
+	   		        	  android:layout_width="match_parent" 
+		   				  android:layout_height="wrap_content"
+		   				  android:layout_below="@+id/winktoolbar_stato_immobili"
+		   				  android:textColor="@color/label_blue"
+		   				  android:text="Classe energetica"/>
+	   		    
+	   		    <Spinner android:id="@+id/cmb_classe_energetica"
+	   		        	 android:layout_width="match_parent" 
+		   				 android:layout_height="wrap_content"
+		   				 android:layout_below="@+id/labelClasseEnergetica"
+		   				 android:textColor="@color/text_white"
+		   				 android:background="@drawable/edit_round_border"/>
+
+   				<RelativeLayout android:id="@+id/winktoolbar_ce_immobili"
+				    			android:layout_width="match_parent"
+				        		android:layout_height="60dp"
+				        		android:layout_gravity="top|center_horizontal"
+				        		android:layout_below="@+id/cmb_classe_energetica"
+				        		android:gravity="clip_horizontal"
+				        		android:orientation="horizontal"
+				        		android:paddingLeft="40dp"
+				        		android:paddingRight="40dp">				    
+				        		
+				    			<ImageButton android:id="@+id/btn_new_ce"    
+				 						     android:src="@drawable/post_icon_"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentLeft="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_edit_ce"
+				 						     android:src="@drawable/edit_item"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_centerInParent="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_del_ce"
+				 						     android:src="@drawable/new_icon_rifiuti_home"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentRight="true"/>
+		    	</RelativeLayout>		    	
+	   		   		   		    	   		    
+	   		    <TextView android:id="@+id/labelRiscaldamento"
+	   		        	  android:layout_width="match_parent" 
+		   				  android:layout_height="wrap_content"
+		   				  android:layout_below="@+id/winktoolbar_ce_immobili"
+		   				  android:textColor="@color/label_blue"
+		   				  android:text="Riscaldamento"/>
+	   		    
+	   		    <Spinner android:id="@+id/cmb_riscaldamento"
+	   		        	 android:layout_width="match_parent" 
+		   				 android:layout_height="wrap_content"
+		   				 android:layout_below="@+id/labelRiscaldamento"
+		   				 android:textColor="@color/text_white"
+		   				 android:background="@drawable/edit_round_border"/>
+
+   				<RelativeLayout android:id="@+id/winktoolbar_riscaldamento_immobili"
+				    			android:layout_width="match_parent"
+				        		android:layout_height="60dp"
+				        		android:layout_gravity="top|center_horizontal"
+				        		android:layout_below="@+id/cmb_riscaldamento"
+				        		android:gravity="clip_horizontal"
+				        		android:orientation="horizontal"
+				        		android:paddingLeft="40dp"
+				        		android:paddingRight="40dp">				    
+				        		
+				    			<ImageButton android:id="@+id/btn_new_riscaldamento"    
+				 						     android:src="@drawable/post_icon_"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentLeft="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_edit_riscaldamento"
+				 						     android:src="@drawable/edit_item"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_centerInParent="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_del_riscaldamento"
+				 						     android:src="@drawable/new_icon_rifiuti_home"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentRight="true"/>
+		    	</RelativeLayout>		    	
+	   		    	   		    	   		    		   		    
+    		    <TextView android:id="@+id/labelClasse"
+    		        	  android:layout_width="match_parent" 
+ 	   					  android:layout_height="wrap_content"
+ 	   					  android:layout_below="@+id/winktoolbar_riscaldamento_immobili"
+ 	   					  android:text="Classe cliente"
+ 	   					  android:textColor="@color/label_blue"/>
+    		    
+    		    <Spinner android:id="@+id/cmb_classe"
+    		        	 android:layout_width="match_parent" 
+ 	   					 android:layout_height="wrap_content"
+ 	   					 android:layout_below="@+id/labelClasse"
+ 	   					 android:background="@drawable/edit_round_border"/>	    		    		    		    	    		    		    		    
+
+   				<RelativeLayout android:id="@+id/winktoolbar_classe"
+				    			android:layout_width="match_parent"
+				        		android:layout_height="60dp"
+				        		android:layout_gravity="top|center_horizontal"
+				        		android:layout_below="@+id/cmb_classe"
+				        		android:gravity="clip_horizontal"
+				        		android:orientation="horizontal"
+				        		android:paddingLeft="40dp"
+				        		android:paddingRight="40dp">				    
+				        		
+				    			<ImageButton android:id="@+id/btn_new_classe"    
+				 						     android:src="@drawable/post_icon_"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentLeft="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_edit_classe"
+				 						     android:src="@drawable/edit_item"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_centerInParent="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_del_classe"
+				 						     android:src="@drawable/new_icon_rifiuti_home"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentRight="true"/>
+		    	</RelativeLayout>		    	
+    		    		    	   		    	   		        		    
+    		    <TextView android:id="@+id/labelTipoContatto"
+    		        	  android:layout_width="match_parent" 
+ 	   					  android:layout_height="wrap_content"
+ 	   					  android:layout_below="@+id/winktoolbar_classe"
+ 	   					  android:text="Tipo contatto"
+ 	   					  android:textColor="@color/label_blue"/>
+    		    
+    		    <Spinner android:id="@+id/cmb_TipoContatto"
+    		        	 android:layout_width="match_parent" 
+ 	   					 android:layout_height="wrap_content"
+ 	   					 android:layout_below="@+id/labelTipoContatto"
+ 	   					 android:background="@drawable/edit_round_border"/>	    		    		    		    	    		    		    		    
+
+   				<RelativeLayout android:id="@+id/winktoolbar_TipoContatto"
+				    			android:layout_width="match_parent"
+				        		android:layout_height="60dp"
+				        		android:layout_gravity="top|center_horizontal"
+				        		android:layout_below="@+id/cmb_TipoContatto"
+				        		android:gravity="clip_horizontal"
+				        		android:orientation="horizontal"
+				        		android:paddingLeft="40dp"
+				        		android:paddingRight="40dp">				    
+				        		
+				    			<ImageButton android:id="@+id/btn_new_TipoContatto"    
+				 						     android:src="@drawable/post_icon_"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentLeft="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_edit_TipoContatto"
+				 						     android:src="@drawable/edit_item"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_centerInParent="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_del_TipoContatto"
+				 						     android:src="@drawable/new_icon_rifiuti_home"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentRight="true"/>
+		    	</RelativeLayout>		    	
+
+    		    <TextView android:id="@+id/labelTipoStanza"
+    		        	  android:layout_width="match_parent" 
+ 	   					  android:layout_height="wrap_content"
+ 	   					  android:layout_below="@+id/winktoolbar_TipoContatto"
+ 	   					  android:text="Tipo Stanza"
+ 	   					  android:textColor="@color/label_blue"/>
+    		    
+    		    <Spinner android:id="@+id/cmb_TipoStanza"
+    		        	 android:layout_width="match_parent" 
+ 	   					 android:layout_height="wrap_content"
+ 	   					 android:layout_below="@+id/labelTipoStanza"
+ 	   					 android:background="@drawable/edit_round_border"/>	    		    		    		    	    		    		    		    
+
+   				<RelativeLayout android:id="@+id/winktoolbar_TipoStanza"
+				    			android:layout_width="match_parent"
+				        		android:layout_height="60dp"
+				        		android:layout_gravity="top|center_horizontal"
+				        		android:layout_below="@+id/cmb_TipoStanza"
+				        		android:gravity="clip_horizontal"
+				        		android:orientation="horizontal"
+				        		android:paddingLeft="40dp"
+				        		android:paddingRight="40dp">				    
+				        		
+				    			<ImageButton android:id="@+id/btn_new_TipoStanza"    
+				 						     android:src="@drawable/post_icon_"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentLeft="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_edit_TipoStanza"
+				 						     android:src="@drawable/edit_item"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_centerInParent="true"/>
+				    			
+				    			<ImageButton android:id="@+id/btn_del_TipoStanza"
+				 						     android:src="@drawable/new_icon_rifiuti_home"
+								             android:layout_width="wrap_content"
+            								 android:layout_height="wrap_content"
+                                             android:scaleX="0.50"
+                                             android:scaleY="0.50"
+            								 android:background="@android:color/transparent"
+            								 android:layout_alignParentRight="true"/>
+		    	</RelativeLayout>		    	
+   								
+			</RelativeLayout>			    				    				  
+        
+	</ScrollView>
+
+</LinearLayout>

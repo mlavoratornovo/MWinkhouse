@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_listageo_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/dialog_popup_border">
+    
+    <TextView android:id="@+id/labelCitta"
+        	  android:layout_width="fill_parent" 
+			  android:layout_height="wrap_content"
+			  android:maxWidth="150dp"
+			  android:textColor="@color/label_blue"
+			  android:text="Città"/>
+
+    <EditText android:id="@+id/txtCitta"
+	      	  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content"
+			  android:background="@drawable/edit_round_border"
+			  android:textColor="@color/text_white"/>
+    
+	<RelativeLayout android:layout_height="50dp"
+        		android:layout_width="match_parent"
+        		android:layout_gravity="top|center_horizontal"
+        		android:gravity="clip_horizontal"
+        		android:orientation="horizontal"
+        		android:paddingTop="10dp" 
+        		android:paddingLeft="40dp"
+        		android:paddingRight="40dp">
+    
+   			<ImageButton
+   			    android:id="@+id/btn_cerca"
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="wrap_content"
+   			    android:background="@android:color/transparent"
+   			    android:src="@drawable/lens_icon_48"/>
+
+   			<ImageButton android:id="@+id/btn_chiudi"
+			 			 android:src="@drawable/close"
+						 android:layout_width="wrap_content"
+           				 android:layout_height="wrap_content"
+           				 android:background="@android:color/transparent"
+           				 android:layout_alignParentRight="true"/>
+        
+        
+    </RelativeLayout>
+	
+	<ListView android:id="@+id/listViewGeo"
+    		  android:layout_width="fill_parent"
+    		  android:layout_height="fill_parent"
+    		  android:minHeight="100dp" 
+    		  android:background="@color/wink_black">
+	</ListView>
+			    		    
+    
+</LinearLayout>

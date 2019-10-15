@@ -1,0 +1,173 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    		    android:layout_width="fill_parent" 
+    		    android:layout_height="fill_parent"
+    		    android:background="@color/wink_black"
+    		    android:paddingTop="5dp"> 
+    		    
+    			<ImageButton android:id="@+id/btn_ricerca_anagrafiche"    
+ 						     android:src="@drawable/lens_icon_big"
+				             android:layout_width="wrap_content"
+        					 android:layout_height="wrap_content"
+        					 android:background="@android:color/transparent"
+        					 android:layout_centerHorizontal="true"/>
+    
+    									
+    		    <ScrollView android:layout_width="fill_parent"
+        					android:layout_height="fill_parent"
+        					android:layout_below="@+id/btn_ricerca_anagrafiche" 
+        					android:background="@color/wink_black">
+    		        
+	    		    		<RelativeLayout android:layout_width="fill_parent"
+            							    android:layout_height="wrap_content"
+            							    android:gravity="top"
+            							    android:padding="8dp">
+            							    
+	    		    		    			<TextView android:id="@+id/labelCognome"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:text="Cognome"
+    		        	   							  android:textColor="@color/verde"/>
+
+	    		    		    		    <EditText android:id="@+id/txtCognome"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelCognome"
+													  android:background="@drawable/edit_round_border"
+													  android:textColor="@color/text_white"/>
+	    		    		    			
+	    		    		    			<TextView android:id="@+id/labelNome"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:text="Nome"
+    		        	   							  android:textColor="@color/verde"
+    		        	   							  android:layout_below="@+id/txtCognome"/>
+
+	    		    		    		    <EditText android:id="@+id/txtNome"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelNome"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelRagioneSociale"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:text="Ragione sociale"
+    		        	   							  android:textColor="@color/verde"
+    		        	   							  android:layout_below="@+id/txtNome"/>
+
+	    		    		    		    <EditText android:id="@+id/txtRagioneSociale"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelRagioneSociale"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelPiva"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:text="Partita iva"
+													  android:layout_below="@+id/txtRagioneSociale"
+													  android:textColor="@color/label_blue"/>
+													  
+	    		    		    		    <EditText android:id="@+id/txtPiva"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelPiva"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+
+	    		    		    		    <TextView android:id="@+id/labelCodiceFiscale"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:text="Codice fiscale"
+    		        	   							  android:layout_below="@+id/txtPiva"
+    		        	   							  android:textColor="@color/label_blue"/>
+
+	    		    		    		    <EditText android:id="@+id/txtCodiceFiscale"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelCodiceFiscale"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelCitta"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:text="Citta"
+    		        	   							  android:layout_below="@+id/txtCodiceFiscale"
+    		        	   							  android:textColor="@color/label_blue"/>
+
+	    		    		    		    <EditText android:id="@+id/txtCitta"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelCitta"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelIndirizzo"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:text="Indirizzo"
+    		        	   							  android:layout_below="@+id/txtCitta"
+    		        	   							  android:textColor="@color/label_blue"/>
+
+	    		    		    		    <EditText android:id="@+id/txtIndirizzo"
+	    		    		    		        	  android:layout_width="match_parent"
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelIndirizzo"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelProvincia"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:maxWidth="150dp"
+    		        	   							  android:layout_below="@+id/txtIndirizzo"
+    		        	   							  android:text="Provincia"
+    		        	   							  android:textColor="@color/label_blue"/>
+	    		    		    		    		  
+	    		    		    		    <TextView android:id="@+id/labelCap"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:maxWidth="150dp"
+    		        	   							  android:layout_toRightOf="@+id/labelProvincia"
+    		        	   							  android:layout_below="@+id/txtIndirizzo"
+    		        	   							  android:text="Cap"
+    		        	   							  android:textColor="@color/label_blue"/>
+	    		    		    		    
+	    		    		    		    <EditText android:id="@+id/txtProvincia"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelProvincia"
+    		        	   							  android:layout_marginRight="2dp"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+		  
+	    		    		    		    <EditText android:id="@+id/txtCap"
+	    		    		    		        	  android:layout_width="wrap_content" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/labelCap"
+    		        	   							  android:layout_toRightOf="@+id/txtProvincia"
+    		        	   							  android:background="@drawable/edit_round_border"
+    		        	   							  android:textColor="@color/text_white"/>
+
+	    		    		    		    
+	    		    		    		    <TextView android:id="@+id/labelClasse"
+	    		    		    		        	  android:layout_width="match_parent" 
+    		        	   							  android:layout_height="wrap_content"
+    		        	   							  android:layout_below="@+id/txtProvincia"
+    		        	   							  android:text="Classe cliente"
+    		        	   							  android:textColor="@color/label_blue"/>
+	    		    		    		    
+	    		    		    		    <Spinner android:id="@+id/cmb_classe"
+	    		    		    		        	 android:layout_width="match_parent" 
+    		        	   							 android:layout_height="wrap_content"
+    		        	   							 android:layout_below="@+id/labelClasse"
+    		        	   							 android:background="@drawable/edit_round_border"/>	    		    		    		    	    		    		    		    
+	    		    		    		    	    		    		    		    
+	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    		    	    		    		    
+            				</RelativeLayout>
+    		    </ScrollView>
+
+</RelativeLayout>
