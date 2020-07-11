@@ -8,6 +8,12 @@ android {
             storeFile file('/home/michele/.android/debug.keystore')
             storePassword 'android'
         }
+        lintOptions {
+            checkReleaseBuilds false
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError false
+        }
     }
     aaptOptions{
         cruncherEnabled = false
@@ -22,10 +28,10 @@ android {
 
     defaultConfig {
         applicationId "org.winkhouse.mwinkhouse"
-        minSdkVersion 19
+        minSdkVersion 26
         targetSdkVersion 28
-        versionCode 24
-        versionName "1.8.1"
+        versionCode 25
+        versionName "1.9.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -73,6 +79,7 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.10.3'
     implementation 'com.google.android.gms:play-services:+'
     implementation files('libs/gson-2.6.2.jar')
+    implementation files('libs/zip4j-2.5.2.jar')
 
 
 }
