@@ -45,7 +45,7 @@ public class DownloadDataWirelessThread extends Thread {
 		this.msg_down = msg_down;
 		this.status = status;
 		this.mHandler = new Handler();
-		this.importhelper = new WirelessImportDataHelper(null);
+		this.importhelper = new WirelessImportDataHelper(null, false);
 
 		if (this.importhelper.getDataUpdateMode().equalsIgnoreCase(WirelessImportDataHelper.UPDATE_METHOD_SOVRASCRIVI)) {
 			this.importhelper.deleteImportDirContent(new File(this.importhelper.getImportDirectory()),new ArrayList<String>());
@@ -169,7 +169,7 @@ public class DownloadDataWirelessThread extends Thread {
 							
 							@Override
 								public void run() {
-									msg_down.setText(String.valueOf(count/1024) + " kB");									
+									msg_down.setText(count / 1024 + " kB");
 									
 								}
 			              });

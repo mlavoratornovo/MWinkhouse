@@ -2,7 +2,6 @@ package org.winkhouse.mwinkhouse.helpers;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,16 +10,15 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 import org.winkhouse.mwinkhouse.models.SysSettingVO;
+import org.winkhouse.mwinkhouse.util.SDFileSystemUtils;
 import org.winkhouse.mwinkhouse.util.SysSettingNames;
+import org.winkhouse.mwinkhouse.util.ZipUtils;
 
+import android.content.Context;
 import android.os.Environment;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.TextView;
 
 public class WirelessImportDataHelper extends ImportDataHelper {
@@ -42,8 +40,8 @@ public class WirelessImportDataHelper extends ImportDataHelper {
 		
 	}	
 	
-	public WirelessImportDataHelper(String extraImportPath) {
-	    super(extraImportPath);
+	public WirelessImportDataHelper(String extraImportPath, boolean overridebasepath) {
+	    super(extraImportPath, overridebasepath);
 	}
 		
 	public byte[] convertIntegers(List<Integer> integers)	{
@@ -130,96 +128,40 @@ public class WirelessImportDataHelper extends ImportDataHelper {
 		
 	}
 	
-	public boolean unZipArchivioWireless(TextView msg_field,Handler mHandler,String zipfilename){
-		
-//		Handler mHandler = new Handler();
-		boolean returnValue = true;
 
-		String zipFile = Environment.getExternalStorageDirectory() + File.separator + "winkhouse/"+zipfilename;
-//		String location = Environment.getExternalStorageDirectory() + File.separator + "winkhouse/import";
-		
-	    try {
-	        File f = new File(location);
-	        if(!f.isDirectory()) {
-	            f.mkdirs();
-	        }
-	        File f1 = new File(zipFile);
-			boolean x = f.exists();
+	public boolean unZipArchivioWireless(Context context, TextView msg_field, Handler mHandler, String zipfilename) {
 
+        boolean returnValue = true;
 
-	        ZipInputStream zin = new ZipInputStream(new FileInputStream(zipFile));
+        String zipFile = zipfilename;
+        File fz = new File(zipFile);
+        ZipUtils zu = new ZipUtils(context);
+        File f = new File(location);
+        if (!f.isDirectory()) {
+            f.mkdirs();
+        }
+        //+ File.separator + fz.getName().replace(".zip", "")
+        // verificare calls per modificare path copia immagini verificare se ci passa l'unzip non cloud
+        if (zu.unZip4jArchivio(zipFile, location)) {
+            SDFileSystemUtils sd = new SDFileSystemUtils();
+//            returnValue = sd.copyFolder(location + File.separator + "immagini",
+//                                        location.replace("import","immagini"));
+            returnValue = sd.copyFolder(location + File.separator + "immagini",
+                    Environment.getExternalStorageDirectory() +
+                            File.separator +
+                            "winkhouse" +
+                            File.separator +
+                            "immagini");
+        }else{
+          //  Toast.makeText(context,"Impossibile trovare o unzippare il file", Toast.LENGTH_LONG).show();
+			returnValue = false;
+        }
 
-	        try {
-	            ZipEntry ze = null;
-	            while ((ze = zin.getNextEntry()) != null) {
-	            		            	
-	            	String filename = ze.getName().substring(ze.getName().lastIndexOf("\\")+1);
+        return returnValue;
 
-	            	if ((mHandler != null) && (msg_field != null)) {
-						mHandler.post(new FieldMsgUpdate(msg_field, "Decopressione file " + filename));
-					}
-
-	                String path = location + File.separator + filename;
-	                	                	            	            
-	                if (!ze.getName().endsWith("xml")){
-	                	
-	                	String imagefilename = ze.getName().substring(ze.getName().lastIndexOf("\\")+1);
-	                	String tmp = ze.getName().substring(0,ze.getName().lastIndexOf("\\"));
-	                	String codiceimmobile = tmp.substring(tmp.lastIndexOf("\\")+1);
-	                	
-	                	String dirpath = location + File.separator + "immagini" + File.separator + codiceimmobile;
-	                	File dirpathfile = new File(dirpath);
-	                	dirpathfile.mkdirs();
-						if (getDataUpdateMode().equalsIgnoreCase("aggiungi")){
-							imagefilename = "Copy_" + imagefilename;
-						}
-	                	path = dirpath + File.separator + imagefilename;
-
-	                }
-	            	
-                    FileOutputStream fout = new FileOutputStream(path, false);
-                    
-                    try {
-                    	long bytecount = 0;
-                        for (int c = zin.read(); c != -1; c = zin.read()) {
-                            fout.write(c);
-                            bytecount ++;
-                            if ((mHandler != null) && (msg_field != null)) {
-                                mHandler.post(new FieldMsgUpdate(msg_field, "Decopressione file " + filename + " kB " + String.valueOf(bytecount / 1024)));
-                            }
-                        }
-                        zin.closeEntry();
-                    }catch(Exception e){
-                        Log.getStackTraceString(e);
-                        zin.closeEntry();
-					}finally {
-						try {
-							fout.close();
-						}catch (Exception e){
-							fout = null;
-						}
-                    }
-                    
-	            }
-	            
-	        }catch(Exception e){
-	        	
-	        	Log.d("WINK", e.getMessage());				
-	        	
-	        }
-	        finally {
-	            zin.close();
-	        }
-	    }
-	    catch (Exception e) {
-        	
-        	Log.d("WINK", e.getMessage());
-			
-	    }		
-		
-		return returnValue;
 	}
-	
+
+
 	public void deleteImportDirContent(File dirLocation, ArrayList<String> namesNotToDel){
 		
 		File[] array = dirLocation.listFiles();

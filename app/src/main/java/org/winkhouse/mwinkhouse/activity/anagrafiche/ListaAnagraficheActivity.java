@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.winkhouse.mwinkhouse.activity.ImportActivity;
 import org.winkhouse.mwinkhouse.activity.adapters.ListaAnagraficheAdapter;
 import org.winkhouse.mwinkhouse.activity.adapters.ListaAnagraficheSelAdapter;
+import org.winkhouse.mwinkhouse.activity.immobili.ListaImmobiliActivity;
 import org.winkhouse.mwinkhouse.activity.listeners.DialogAnagraficheCancellaListener;
 import org.winkhouse.mwinkhouse.helpers.DataBaseHelper;
 import org.winkhouse.mwinkhouse.helpers.SearchParam;
@@ -449,7 +451,12 @@ public class ListaAnagraficheActivity extends AppCompatActivity {
 			        alertDialog.show();				
 			        
 				}
-			}else{
+			}		}else if (itemId == R.id.EsportaZip){
+            if (selected.keySet().size() > 0){
+                Intent intent = new Intent(ListaAnagraficheActivity.this, ImportActivity.class);
+                intent.putIntegerArrayListExtra(ActivityMessages.ANAGRAFICHE_LIST, new ArrayList(selected.keySet()));
+                startActivity(intent);
+            }else{
 				Toast.makeText(ListaAnagraficheActivity.this, "Selezionare almeno una anagrafica",Toast.LENGTH_SHORT).show();
 			}
 

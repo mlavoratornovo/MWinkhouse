@@ -3,5 +3,6 @@
     <item android:icon="@drawable/post_icon_" android:id="@+id/nuova_anagrafica" android:title="Nuova" winkhouse:showAsAction="ifRoom"></item>
     <item android:icon="@drawable/ic_assignment_ind_white_48dp" android:id="@+id/import_anagrafica" android:title="Importa" winkhouse:showAsAction="ifRoom"></item>
     <item android:icon="@drawable/new_icon_rifiuti_home" android:id="@+id/cancella_anagrafica" android:title="Cancella" winkhouse:showAsAction="ifRoom"></item>
-    <item android:icon="@drawable/lens_icon" android:id="@+id/ricerca_anagrafica" android:title="Ricerca" winkhouse:showAsAction="ifRoom"></item>    	
+    <item android:icon="@drawable/lens_icon" android:id="@+id/ricerca_anagrafica" android:title="Ricerca" winkhouse:showAsAction="ifRoom"></item>
+    <item android:icon="@drawable/esportazionemanuale" android:id="@+id/EsportaZip" android:title="Esporta zip" winkhouse:showAsAction="ifRoom"></item>
 </menu>

@@ -30,7 +30,6 @@ import org.winkhouse.mwinkhouse.models.columns.TipologieImmobiliColumnNames;
 import org.winkhouse.mwinkhouse.util.ActivityMessages;
 import org.winkhouse.mwinkhouse.util.NetworkUtils;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -199,7 +198,7 @@ public class DettaglioImmobileFragment extends Fragment {
 																  adapterGeo, 
 																  cittafind.getText().toString());
 						
-						gft.execute();
+						gft.execute(new Object[]{});
 					}else{
 						Toast.makeText(getActivity().getBaseContext(), "Inserire una città", Toast.LENGTH_SHORT).show();
 					}

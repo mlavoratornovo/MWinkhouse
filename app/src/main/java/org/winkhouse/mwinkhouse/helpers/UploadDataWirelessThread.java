@@ -40,7 +40,7 @@ public class UploadDataWirelessThread extends Thread {
 		this.mHandler = new Handler();		
 		count = 0;
 		
-		this.exportHelper = new WirelessExportDataHelper();
+		this.exportHelper = null;
 		this.dbh = new DataBaseHelper(context,DataBaseHelper.NONE_DB);
 		this.sqldb = dbh.getReadableDatabase();
 		
@@ -89,7 +89,7 @@ public class UploadDataWirelessThread extends Thread {
 							
 							@Override
 							public void run() {
-								msg_up.setText("Inviati " + String.valueOf(count/1024) + "/" + String.valueOf(pd_loader_up.getMax()) + " kB");									
+								msg_up.setText("Inviati " + count / 1024 + "/" + pd_loader_up.getMax() + " kB");
 								pd_loader_up.setProgress(count);
 								status.setStatus(false);
 								return;

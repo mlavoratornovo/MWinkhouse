@@ -69,18 +69,51 @@ public class ImmobiliVO implements Parcelable{
 		provincia = p.readString();
 		cap = p.readString();
 		citta = p.readString();
-		zona = p.readString();	
-		dataInserimento = new Date(p.readLong());
-		dataLibero = new Date(p.readLong());
+		zona = p.readString();
+
+		Long di = p.readLong();
+		if (di == -1){
+            dataInserimento = new Date();
+        }else{
+            dataInserimento = new Date(di);
+        }
+
+        Long dl = p.readLong();
+        if (dl == -1){
+            dataLibero = null;
+        }else{
+            dataLibero = new Date(dl);
+        }
+
 		descrizione = p.readString();
 		mutuoDescrizione = p.readString();
+
 		prezzo = p.readDouble();
 		mutuo = p.readDouble();
 		spese = p.readDouble();
 		varie = p.readString();
-		visione = new Boolean(p.readString());
-		storico = new Boolean(p.readString());
-		affittabile = new Boolean(p.readString());
+
+		Byte v = p.readByte();
+		if (v != -1){
+            visione = p.readByte() != 0;
+        }else{
+		    visione = false;
+        }
+
+        Byte s = p.readByte();
+        if (s != -1){
+            storico = p.readByte() != 0;
+        }else {
+            storico = false;
+        }
+
+        Byte a = p.readByte();
+        if (a != -1){
+            affittabile = p.readByte() != 0;
+        }else{
+            affittabile = false;
+        }
+
 		mq = p.readInt();
 		annoCostruzione = p.readInt();
 		codAgenteInseritore = p.readInt();
@@ -294,29 +327,29 @@ public class ImmobiliVO implements Parcelable{
 		if (column_list != null){
 			if (column_list.containsKey("STORICO")){
 				int tmp = c.getInt(c.getColumnIndex("STORICO"));
-				storico = (tmp == 0)?false:true;
+				storico = tmp != 0;
 			}
 		}else{
 			int tmp = c.getInt(c.getColumnIndex("STORICO"));
-			storico = (tmp == 0)?false:true;
+			storico = tmp != 0;
 		}
 		if (column_list != null){
 			if (column_list.containsKey("VISIONE")){
 				int tmp = c.getInt(c.getColumnIndex("VISIONE"));
-				visione = (tmp == 0)?false:true;
+				visione = tmp != 0;
 			}
 		}else{
 			int tmp = c.getInt(c.getColumnIndex("VISIONE"));
-			visione = (tmp == 0)?false:true;
+			visione = tmp != 0;
 		}
 		if (column_list != null){
 			if (column_list.containsKey("AFFITTO")){
 				int tmp = c.getInt(c.getColumnIndex("AFFITTO"));
-				affittabile = (tmp == 0)?false:true;
+				affittabile = tmp != 0;
 			}
 		}else{
 			int tmp = c.getInt(c.getColumnIndex("AFFITTO"));
-			affittabile = (tmp == 0)?false:true;
+			affittabile = tmp != 0;
 		}	
 		if (column_list != null){
 			if (column_list.containsKey("CODAGENTEINSERITORE")){
@@ -675,36 +708,138 @@ public class ImmobiliVO implements Parcelable{
 	
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(codImmobile);
-		dest.writeString(rif);
-		dest.writeString(indirizzo);
-		dest.writeString(provincia);
-		dest.writeString(cap);
-		dest.writeString(citta);
-		dest.writeString(zona);	
-		dest.writeLong(dataInserimento.getTime());		
-		dest.writeLong(dataLibero.getTime());
-		dest.writeString(descrizione);
-		dest.writeString(mutuoDescrizione);
-		dest.writeDouble(prezzo);
-		dest.writeDouble(mutuo);
-		dest.writeDouble(spese);
-		dest.writeString(varie);		 
-		dest.writeString(visione.toString());
-		dest.writeString(storico.toString());
-		dest.writeString(affittabile.toString());
-		dest.writeInt(mq);
-		dest.writeInt(annoCostruzione);
-		dest.writeInt(codAgenteInseritore);
-		dest.writeInt(codAnagrafica);
-		dest.writeInt(codRiscaldamento);
-		dest.writeInt(codStato);
-		dest.writeInt(codTipologia);		
-		dest.writeInt(codClasseEnergetica);
 
+        if (codImmobile == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(codImmobile);
+        }
+        if (rif == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeString(rif);
+        }
+        if (indirizzo == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeString(indirizzo);
+        }
+        if (provincia == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeString(provincia);
+        }
+        if (cap == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeString(cap);
+        }
+        if (citta == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeString(citta);
+        }
+        if (zona == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeString(zona);
+        }
+        if (dataInserimento == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeLong(dataInserimento.getTime());
+        }
+        if (dataLibero == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeLong(dataLibero.getTime());
+        }
+        if (descrizione == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeString(descrizione);
+        }
+        if (mutuoDescrizione == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeString(mutuoDescrizione);
+        }
+        if (prezzo == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeDouble(prezzo);
+        }
+		if (mutuo == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeDouble(mutuo);
+        }
+        if (spese == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeDouble(spese);
+        }
+        if (varie == null){
+            dest.writeValue(null);
+        }else {
+            dest.writeString(varie);
+        }
+        if (visione == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeByte((byte) (visione ? 1 : 0));
+        }
+        if (storico == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeByte((byte) (storico ? 1 : 0));
+        }
+        if (affittabile == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeByte((byte) (affittabile ? 1 : 0));
+        }
+        if (mq == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(mq);
+        }
+        if (annoCostruzione == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(annoCostruzione);
+        }
+        if (codAgenteInseritore == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(codAgenteInseritore);
+        }
+        if (codAnagrafica == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(codAnagrafica);
+        }
+        if (codRiscaldamento == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(codRiscaldamento);
+        }
+        if (codStato == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(codStato);
+        }
+        if (codTipologia == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(codTipologia);
+        }
+        if (codClasseEnergetica == null){
+            dest.writeValue(null);
+        }else{
+            dest.writeInt(codClasseEnergetica);
+        }
 		
 	}
-
-
 
 }

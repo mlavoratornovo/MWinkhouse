@@ -90,29 +90,28 @@ public class CloudSearchService extends IntentService {
 
                         try {
 
-                            filename += String.valueOf(randomNo) + "_";
+                            filename += randomNo + "_";
                             filename += String.valueOf(new Date().getTime());
                             String xmlfilename = filename + ".xml";
 
-                            ExportSearchParamsHelper esph = new ExportSearchParamsHelper();
+                            ExportSearchParamsHelper esph = new ExportSearchParamsHelper(null);
 
                             if (esph.exportSearchParamToXML(al_params, xmlfilename)) {
 
-                                if (esph.zipArchivio(esph.getCloudSearchDirectory(), esph.getCloudSearchDirectory() + File.separator + filename)) {
+                                if (esph.zipArchivio(this, esph.getCloudSearchDirectory(), esph.getCloudSearchDirectory() + File.separator + filename)) {
 
                                     if (doUploadRequest(getApplicationContext(),randomNo,notificationmsg,esph.getCloudSearchDirectory(),filename)){
 
                                         NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                                                           ((SearchParam)al_params.get(0)).getSearchType(),
-                                                                                           "Ricerca cloud " + ((SearchParam)al_params.get(0)).getSearchType(),
+                                                                                           al_params.get(0).getSearchType(),
+                                                                                           "Ricerca cloud " + al_params.get(0).getSearchType(),
                                                                                            "Inviata ricerca " + notificationmsg,
                                                                                            randomNo);
-                                        ;
 
                                     } else {
                                         NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                                                           ((SearchParam)al_params.get(0)).getSearchType(),
-                                                                                           "Ricerca cloud " + ((SearchParam)al_params.get(0)).getSearchType(),
+                                                                                           al_params.get(0).getSearchType(),
+                                                                                           "Ricerca cloud " + al_params.get(0).getSearchType(),
                                                                                            "Impossibile inviare ricerca " + notificationmsg,
                                                                                            randomNo);
                                         doPolling = false;
@@ -144,8 +143,8 @@ public class CloudSearchService extends IntentService {
                                         }
 
                                         NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                                                           ((SearchParam) al_params.get(0)).getSearchType(),
-                                                                                           "Ricerca cloud " + ((SearchParam) al_params.get(0)).getSearchType(),
+                                                                                           al_params.get(0).getSearchType(),
+                                                                                           "Ricerca cloud " + al_params.get(0).getSearchType(),
                                                                                            "Ricerca cloud conclusa " + notificationmsg,
                                                                                            randomNo);
                                     }
@@ -154,8 +153,8 @@ public class CloudSearchService extends IntentService {
 
                                 } else {
                                     NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                                                       ((SearchParam)al_params.get(0)).getSearchType(),
-                                                                                       "Ricerca cloud " + ((SearchParam)al_params.get(0)).getSearchType(),
+                                                                                       al_params.get(0).getSearchType(),
+                                                                                       "Ricerca cloud " + al_params.get(0).getSearchType(),
                                                                                        "Impossibile generare la richiesta",
                                                                                        randomNo);
 
@@ -163,8 +162,8 @@ public class CloudSearchService extends IntentService {
 
                             } else {
                                 NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                                                   ((SearchParam)al_params.get(0)).getSearchType(),
-                                                                                   "Ricerca cloud " + ((SearchParam)al_params.get(0)).getSearchType(),
+                                                                                   al_params.get(0).getSearchType(),
+                                                                                   "Ricerca cloud " + al_params.get(0).getSearchType(),
                                                                                    "Impossibile generare la richiesta",
                                                                                    randomNo);
                             }
@@ -178,8 +177,8 @@ public class CloudSearchService extends IntentService {
                     }else{
 
                         NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                                           ((SearchParam)al_params.get(0)).getSearchType(),
-                                                                           "Ricerca cloud " + ((SearchParam)al_params.get(0)).getSearchType(),
+                                                                           al_params.get(0).getSearchType(),
+                                                                           "Ricerca cloud " + al_params.get(0).getSearchType(),
                                                                            "Impossibile generare la richiesta, nessun parametro inserito",
                                                                            randomNo);
                     }

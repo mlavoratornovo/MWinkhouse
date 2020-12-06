@@ -7,20 +7,23 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 public class ImportDataThread extends Thread {
 
-	private ProgressDialog pd_loader = null;
+	private ProgressBar pd_loader = null;
 	private ImportDatiHandler handle = null;
 	private StartUpActivity activity = null;
 	private ImportDataHelper importhelper = null;
 	private SQLiteDatabase sqldb = null;
-	
+    private EditText message = null;
+
 	private class ImportDatiHandler extends Handler{
 		
-		private ProgressDialog pd_loader = null;
+		private ProgressBar pd_loader = null;
 		
-		public ImportDatiHandler(ProgressDialog pd_loader){
+		public ImportDatiHandler(ProgressBar pd_loader){
 			this.pd_loader = pd_loader;			
 		}
 		
@@ -32,11 +35,12 @@ public class ImportDataThread extends Thread {
 		
 	} 
 	
-	public ImportDataThread(ProgressDialog pd_loader,Context context) {
+	public ImportDataThread(ProgressBar pd_loader, EditText message, Context context) {
 		
-		this.pd_loader = pd_loader; 
+		this.pd_loader = pd_loader;
+		this.message = message;
 		this.handle = new ImportDatiHandler(this.pd_loader);
-		this.importhelper = new ImportDataHelper(null);
+		this.importhelper = new ImportDataHelper(null, false);
 		DataBaseHelper dbh = new DataBaseHelper(context,DataBaseHelper.NONE_DB);
 		this.sqldb = dbh.getWritableDatabase();
 	}
@@ -48,38 +52,38 @@ public class ImportDataThread extends Thread {
 			while(this.pd_loader.getProgress() <= this.pd_loader.getMax()){
 
                 if (this.pd_loader.getProgress() == 0){
-                	this.pd_loader.setMessage("Importazione classi energetiche");
+                	this.message.setText("Importazione classi energetiche");
                 	importhelper.importClasseEnergeticaToDB(this.sqldb);
                 }
                 if (this.pd_loader.getProgress() == 1){
-                	this.pd_loader.setMessage("Importazione classi cliente");
+                	this.message.setText("Importazione classi cliente");
                 	importhelper.importClassiClienteToDB(this.sqldb);
                 }
                 if (this.pd_loader.getProgress() == 2){
-                	this.pd_loader.setMessage("Importazione riscaldamenti");
+                	this.message.setText("Importazione riscaldamenti");
                 	importhelper.importRiscaldamentiToDB(this.sqldb);
                 }
                 if (this.pd_loader.getProgress() == 3){
-                	this.pd_loader.setMessage("Importazione stato conservativo");
+                	this.message.setText("Importazione stato conservativo");
                 	importhelper.importStatoConservativoToDB(this.sqldb);
                 }
                 if (this.pd_loader.getProgress() == 4){
-                	this.pd_loader.setMessage("Importazione tipologie contatti");
+                	this.message.setText("Importazione tipologie contatti");
                 	importhelper.importTipologiaContattiToDB(this.sqldb);
                 }
                 if (this.pd_loader.getProgress() == 5){
-                	this.pd_loader.setMessage("Importazione tipologie immobili");
+                	this.message.setText("Importazione tipologie immobili");
                 	importhelper.importTipologieImmobiliToDB(sqldb);
                 }
                 if (this.pd_loader.getProgress() == 6){
                 	importhelper.importTipologiaStanzeToDB(sqldb);
                 }
                 if (this.pd_loader.getProgress() == 7){
-                	this.pd_loader.setMessage("Importazione immobili");
+                	this.message.setText("Importazione immobili");
                 	importhelper.importImmobiliToDB(this.sqldb);
                 }
                 if (this.pd_loader.getProgress() == 8){              
-                	this.pd_loader.setMessage("Importazione anagrafiche");
+                	this.message.setText("Importazione anagrafiche");
                 	importhelper.importAnagraficheToDB(this.sqldb);
                 }
                 if (this.pd_loader.getProgress() == 9){
@@ -89,14 +93,14 @@ public class ImportDataThread extends Thread {
                 	importhelper.importAbbinamentiToDB(this.sqldb);
                 }
                 if (this.pd_loader.getProgress() == 11){
-                	this.pd_loader.setMessage("Importazione contatti");
+                	this.message.setText("Importazione contatti");
                 	importhelper.importContattiToDB(sqldb);
                 }
                 if (this.pd_loader.getProgress() == 12){
                 	importhelper.importDatiCatastaliToDB(sqldb);
                 }
                 if (this.pd_loader.getProgress() == 13){
-                	this.pd_loader.setMessage("Importazione immagini");
+                	this.message.setText("Importazione immagini");
                 	importhelper.importImmaginiToDB(sqldb);
                 }
                 if (this.pd_loader.getProgress() == 14){
@@ -112,7 +116,7 @@ public class ImportDataThread extends Thread {
                 	importhelper.importAttributeValueToDB(sqldb);
                 }
                 if (this.pd_loader.getProgress() == 18){
-                	this.pd_loader.setMessage("Importazione propietari immobili");
+                	this.message.setText("Importazione propietari immobili");
                 	importhelper.importImmobiliPropietariToDB(sqldb);
                 }
                 
@@ -120,7 +124,6 @@ public class ImportDataThread extends Thread {
                 handle.sendMessage(handle.obtainMessage());
                 
                 if(this.pd_loader.getProgress() == this.pd_loader.getMax()){
-                	this.pd_loader.dismiss();
                 	break;
                 	
                 }

@@ -1,6 +1,8 @@
 package org.winkhouse.mwinkhouse.helpers;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
 
 import org.winkhouse.mwinkhouse.activity.ImportActivity.ThreadSincro;
 import org.winkhouse.mwinkhouse.activity.StartUpActivity;
@@ -23,7 +25,7 @@ public class ExportDataWirelessThread extends Thread {
 	private ProgressBar pd_loader_up = null;
 	private TextView msg_up = null;
 	private Handler mHandler = null;
-
+    private ArrayList itemsToExport = null;
 	private boolean upstatus = false;
 	
 	private class ExportDatiHandler extends Handler{
@@ -42,19 +44,21 @@ public class ExportDataWirelessThread extends Thread {
 		
 	} 
 	
-	public ExportDataWirelessThread(Context context,ProgressBar pd_loader_up, TextView msg_up, ThreadSincro status) {
+	public ExportDataWirelessThread(Context context, ProgressBar pd_loader_up, TextView msg_up, ThreadSincro status, ArrayList itemsToExport, String path2Export) throws Exception{
 		this.context = context;
 		this.pd_loader_up = pd_loader_up;
 		this.pd_loader_up.setMax(20);
 		this.msg_up = msg_up;
 		this.status = status;
 		this.mHandler = new Handler();		
-		this.exporthelper = new WirelessExportDataHelper();
-		this.exporthelper.deleteFolder(new File(this.exporthelper.getExportDirectory()));
-		File f = new File(Environment.getExternalStorageDirectory() + File.separator + "winkhouse/winkhouseExport.zip");
-		if (f.exists()){
-			f.delete();
-		}
+		this.exporthelper = new WirelessExportDataHelper(itemsToExport);
+		this.exporthelper.setExportDirectory(path2Export+File.separator+"tmp");
+
+		File fexporttmp = new File(this.exporthelper.getExportDirectory());
+		if (fexporttmp.exists()){
+            this.exporthelper.deleteFolder(fexporttmp);
+        }
+		fexporttmp.mkdirs();
 		DataBaseHelper dbh = new DataBaseHelper(context,DataBaseHelper.NONE_DB);
 		this.sqldb = dbh;
 				
@@ -153,7 +157,7 @@ public class ExportDataWirelessThread extends Thread {
         					pd_loader_up.setProgress(8);
         				}
         			});	                		                	                	
-                	exporthelper.exportImmobiliToXML(this.sqldb);
+                	exporthelper.exportImmobiliToXML(this.sqldb, context);
                 }
                 if (this.pd_loader_up.getProgress() == 8){
                 	this.mHandler.post(new Runnable() {
@@ -164,7 +168,7 @@ public class ExportDataWirelessThread extends Thread {
         					pd_loader_up.setProgress(9);
         				}
         			});	                		                	
-                	exporthelper.exportAnagraficheToXML(this.sqldb);
+                	exporthelper.exportAnagraficheToXML(this.sqldb, context);
                 }
                 if (this.pd_loader_up.getProgress() == 9){
                 	this.mHandler.post(new Runnable() {
@@ -197,7 +201,7 @@ public class ExportDataWirelessThread extends Thread {
         					pd_loader_up.setProgress(12);
         				}
         			});	                		                	
-                	exporthelper.exportContattiToXML(sqldb);
+                	exporthelper.exportContattiToXML(sqldb, context);
                 }
                 if (this.pd_loader_up.getProgress() == 12){
                 	this.mHandler.post(new Runnable() {
@@ -218,8 +222,8 @@ public class ExportDataWirelessThread extends Thread {
         					pd_loader_up.setProgress(14);
         				}
         			});	                		                	
-                	exporthelper.exportImmaginiToXML(sqldb);
-                	exporthelper.copyImmaginiFolder();
+                	exporthelper.exportImmaginiToXML(sqldb,context);
+                	exporthelper.copyImmaginiFolder(sqldb,context);
                 }
                 if (this.pd_loader_up.getProgress() == 14){
                 	this.mHandler.post(new Runnable() {
@@ -230,7 +234,7 @@ public class ExportDataWirelessThread extends Thread {
         				}
         			});	                		                	
                 	
-                	exporthelper.exportStanzeImmobiliToXML(sqldb);
+                	exporthelper.exportStanzeImmobiliToXML(sqldb, context);
                 }
                 if (this.pd_loader_up.getProgress() == 15){
                 	this.mHandler.post(new Runnable() {
@@ -288,8 +292,23 @@ public class ExportDataWirelessThread extends Thread {
         				}
         			});	                		                	
                 	
-                	exporthelper.zipArchivio(msg_up,mHandler);
-                }
+                	exporthelper.zipArchivio(context,
+                                             msg_up,
+                                             mHandler,
+                               exporthelper.getExportDirectory(),
+                            exporthelper.getExportDirectory().replace("/tmp","") + File.separator + "winkhouseExport" + new Long(new Date().getTime()).toString() + ".zip");
+
+                	exporthelper.deleteFolder(new File(exporthelper.getExportDirectory()));
+					this.mHandler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							msg_up.setText("Esportazione completata");
+							pd_loader_up.setProgress(20);
+						}
+					});
+
+				}
                 
                 Thread.sleep(500);
                 

@@ -10,9 +10,9 @@
         					 android:layout_height="wrap_content"
         					 android:background="@android:color/transparent"
         					 android:layout_centerHorizontal="true"/>
-    
-    									
-    		    <ScrollView android:layout_width="fill_parent"
+
+
+    <ScrollView android:layout_width="fill_parent"
         					android:layout_height="fill_parent"
         					android:layout_below="@+id/btn_ricerca_anagrafiche" 
         					android:background="@color/wink_black">

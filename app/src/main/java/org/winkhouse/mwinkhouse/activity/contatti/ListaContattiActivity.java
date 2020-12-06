@@ -83,7 +83,7 @@ public class ListaContattiActivity extends AppCompatActivity {
 	
 	protected ArrayList<ContattiVO> getData(){
 		
-		list = new ArrayList();
+		list = new ArrayList<ContattiVO>();
 		
 		
 		if (getIntent().getExtras() != null){

@@ -6,6 +6,7 @@ import org.winkhouse.mwinkhouse.activity.datibase.DatiBaseActivity;
 import org.winkhouse.mwinkhouse.activity.immobili.ListaImmobiliActivity;
 import org.winkhouse.mwinkhouse.activity.settings.SettingsActivity;
 import org.winkhouse.mwinkhouse.helpers.DataBaseHelper;
+import org.winkhouse.mwinkhouse.util.ActivityMessages;
 import org.winkhouse.mwinkhouse.util.SDFileSystemUtils;
 import org.winkhouse.mwinkhouse.util.SystemUiHider;
 
@@ -28,6 +29,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.google.api.services.drive.Drive;
 
 
 /**
@@ -284,16 +287,15 @@ public class StartUpActivity extends AppCompatActivity{
 //			startActivity(importactivity);
 //
 //		} else
-        if (itemId == R.id.EsportaWireless) {
+        if (itemId == R.id.ImportaZip) {
 			Intent importactivity = new Intent(StartUpActivity.this, ImportActivity.class);
 			importactivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 			importactivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			importactivity.putExtra(ImportActivity.ACTIVITY_TYPE, ImportActivity.TYPE_EXPORT);
+			importactivity.putExtra(ActivityMessages.ACTIVITY_TYPE, ActivityMessages.IMPORT_ACTION);
 			startActivity(importactivity);				
 			
 		}
-		
-		
+
 		return true;
 	}
 

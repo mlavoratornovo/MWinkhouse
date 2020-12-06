@@ -42,7 +42,8 @@
 							android:layout_alignParentRight="true"
 							android:background="@android:color/transparent"
 							android:src="@drawable/globe_icon_white_web" />
-					</RelativeLayout>
+
+                    </RelativeLayout>
 
 				</LinearLayout>
     									

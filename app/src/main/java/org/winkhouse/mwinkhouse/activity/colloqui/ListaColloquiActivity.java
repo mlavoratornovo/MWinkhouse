@@ -335,10 +335,10 @@ public class ListaColloquiActivity extends AppCompatActivity {
 		        alertDialog.setMessage("Procedere con la cancellazione dei colloqui ?");
 		        alertDialog.setIcon(R.drawable.help);
 		        
-		        ArrayList al = new ArrayList();
+		        ArrayList<Integer> al = new ArrayList<Integer>();
 		        Iterator it = selected.keySet().iterator();
 		        while (it.hasNext()) {
-					al.add(it.next());					
+					al.add((Integer)it.next());
 				}
 		        
 		        alertDialog.setPositiveButton("SI", new DialogColloquioCancellaListener(al,getApplicationContext(),codimmobile,codanagrafica));

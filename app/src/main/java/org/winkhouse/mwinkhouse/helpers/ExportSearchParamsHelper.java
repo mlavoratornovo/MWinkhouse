@@ -13,15 +13,15 @@ import javolution.xml.XMLBinding;
 import javolution.xml.XMLObjectWriter;
 import javolution.xml.stream.XMLStreamException;
 
+import android.content.Context;
 import android.os.Environment;
-import android.os.Handler;
-import android.widget.TextView;
 
 public class ExportSearchParamsHelper extends ExportDataHelper {
 
 	private String cloudSearchDirectory = null;
 	
-	public ExportSearchParamsHelper() {
+	public ExportSearchParamsHelper(ArrayList itemsToExport) throws Exception {
+	    super(itemsToExport);
 		String state = Environment.getExternalStorageState();
 		cloudSearchDirectory = Environment.getExternalStorageDirectory() + File.separator + "winkhouse/searchC";
 	}
@@ -88,14 +88,14 @@ public class ExportSearchParamsHelper extends ExportDataHelper {
 	}
 	
 	
-	public boolean zipArchivio(String dirToZip,String filePathName){
+	public boolean zipArchivio(Context context, String dirToZip, String filePathName){
 		
 		boolean returnValue = true;
 		
-		ZipUtils zu = new ZipUtils(dirToZip,filePathName + ".zip");
-		zu.zipDirectory();
-		
-		File f = new File(filePathName + ".zip");
+		ZipUtils zu = new ZipUtils(context);
+		zu.zip4jArchivio(dirToZip,filePathName + ".zip");
+
+        File f = new File(filePathName + ".zip");
 		
 		returnValue = f.exists();
 		

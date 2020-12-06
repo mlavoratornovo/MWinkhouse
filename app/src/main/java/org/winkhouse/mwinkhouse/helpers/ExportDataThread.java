@@ -16,6 +16,7 @@ public class ExportDataThread extends Thread {
 	private StartUpActivity activity = null;
 	private ExportDataHelper exporthelper = null;
 	private DataBaseHelper sqldb = null;
+	private Context context = null;
 	
 	private class ExportDatiHandler extends Handler{
 		
@@ -33,13 +34,14 @@ public class ExportDataThread extends Thread {
 		
 	} 
 	
-	public ExportDataThread(ProgressDialog pd_loader,Context context) {
+	public ExportDataThread(ProgressDialog pd_loader,Context context) throws Exception{
 		
 		this.pd_loader = pd_loader; 
 		this.handle = new ExportDatiHandler(this.pd_loader);
-		this.exporthelper = new ExportDataHelper();
+		this.exporthelper = new ExportDataHelper(null);
 		this.exporthelper.deleteFolder(new File(this.exporthelper.getExportDirectory()));
 		DataBaseHelper dbh = new DataBaseHelper(context,DataBaseHelper.NONE_DB);
+		this.context = context;
 		this.sqldb = dbh;		
 	}
 
@@ -78,11 +80,11 @@ public class ExportDataThread extends Thread {
                 }
                 if (this.pd_loader.getProgress() == 7){
                 	this.pd_loader.setMessage("Esportazione immobili");
-                	exporthelper.exportImmobiliToXML(this.sqldb);
+                	exporthelper.exportImmobiliToXML(this.sqldb, this.context);
                 }
                 if (this.pd_loader.getProgress() == 8){                
                 	this.pd_loader.setMessage("Esportazione anagrafiche");
-                	exporthelper.exportAnagraficheToXML(this.sqldb);
+                	exporthelper.exportAnagraficheToXML(this.sqldb, this.context);
                 }
                 if (this.pd_loader.getProgress() == 9){
                 	exporthelper.exportAgentiToXML(this.sqldb);
@@ -92,18 +94,18 @@ public class ExportDataThread extends Thread {
                 }
                 if (this.pd_loader.getProgress() == 11){
                 	this.pd_loader.setMessage("Esportazione contatti");
-                	exporthelper.exportContattiToXML(sqldb);
+                	exporthelper.exportContattiToXML(sqldb, this.context);
                 }
                 if (this.pd_loader.getProgress() == 12){
                 	exporthelper.exportDatiCatastaliToXML(sqldb);
                 }
                 if (this.pd_loader.getProgress() == 13){
                 	this.pd_loader.setMessage("Esportazione immagini");
-                	exporthelper.exportImmaginiToXML(sqldb);
-                	exporthelper.copyImmaginiFolder();
+                	exporthelper.exportImmaginiToXML(sqldb, context);
+                	exporthelper.copyImmaginiFolder(sqldb, context);
                 }
                 if (this.pd_loader.getProgress() == 14){
-                	exporthelper.exportStanzeImmobiliToXML(sqldb);
+                	exporthelper.exportStanzeImmobiliToXML(sqldb, context);
                 }
                 if (this.pd_loader.getProgress() == 15){
                 	exporthelper.exportEntityToXML(sqldb);

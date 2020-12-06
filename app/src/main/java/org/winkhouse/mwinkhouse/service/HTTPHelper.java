@@ -53,7 +53,7 @@ public class HTTPHelper {
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
-        String urlwinkcloud = sharedPref.getString(SysSettingNames.WINKCLOUDURL,"http://www.winkcloudquery.org");
+        String urlwinkcloud = sharedPref.getString(SysSettingNames.WINKCLOUDURL,SysSettingNames.WINKCLOUDURLVALUE);
         String urlwinkid = sharedPref.getString(SysSettingNames.WINKCLOUDID,null);
 
         OkHttpClient client = new OkHttpClient();
@@ -184,7 +184,7 @@ public class HTTPHelper {
         int DOWNLOAD_CHUNK_SIZE = 2048;
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        String urlwinkcloud = sharedPref.getString(SysSettingNames.WINKCLOUDURL,"http://www.winkcloudquery.org");
+        String urlwinkcloud = sharedPref.getString(SysSettingNames.WINKCLOUDURL,SysSettingNames.WINKCLOUDURLVALUE);
 
         OkHttpClient client = new OkHttpClient();
         String url = (urlwinkcloud.endsWith("/"))
@@ -226,7 +226,7 @@ public class HTTPHelper {
         ResponseByCodeQueryName[] returnValue = null;
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        String urlwinkcloud = sharedPref.getString(SysSettingNames.WINKCLOUDURL,"http://www.winkcloudquery.org");
+        String urlwinkcloud = sharedPref.getString(SysSettingNames.WINKCLOUDURL,SysSettingNames.WINKCLOUDURLVALUE);
 
         OkHttpClient client = new OkHttpClient();
         String url = (urlwinkcloud.endsWith("/"))
@@ -269,7 +269,7 @@ public class HTTPHelper {
     public boolean deleteByQueryFileName(Context context, String code, String queryName){
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        String urlwinkcloud = sharedPref.getString(SysSettingNames.WINKCLOUDURL,"http://www.winkcloudquery.org");
+        String urlwinkcloud = sharedPref.getString(SysSettingNames.WINKCLOUDURL,SysSettingNames.WINKCLOUDURLVALUE);
 
         OkHttpClient client = new OkHttpClient();
         String url = (urlwinkcloud.endsWith("/"))

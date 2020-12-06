@@ -212,7 +212,7 @@ public class GDriveHelper implements EasyPermissions.PermissionCallbacks{
                 files.addAll(result2.getFiles());
             }while(result.getPageToken() != null && result.getPageToken().length() > 0);
 
-            ExportSearchParamsHelper esph = new ExportSearchParamsHelper();
+            ExportSearchParamsHelper esph = new ExportSearchParamsHelper(null);
 
             if (files != null) {
 
@@ -238,7 +238,7 @@ public class GDriveHelper implements EasyPermissions.PermissionCallbacks{
                             String[] rfnArr = responseFileName.split("_");
                             String extraFolderName = "WFTPR_" + rfnArr[2];
 
-                            WirelessImportDataHelper widh = new WirelessImportDataHelper(extraFolderName);
+                            WirelessImportDataHelper widh = new WirelessImportDataHelper(extraFolderName, false);
                             widh.setContext(this.context);
 
                             java.io.File destination = new java.io.File(Environment.getExternalStorageDirectory() +
@@ -257,7 +257,7 @@ public class GDriveHelper implements EasyPermissions.PermissionCallbacks{
 
                             if (sdfsu.copyFile(download, destination)) {
 
-                                if (widh.unZipArchivioWireless(null, null, responseFileName)) {
+                                if (widh.unZipArchivioWireless(this.context, null, null, responseFileName)) {
 
                                     DataBaseHelper dbh = new DataBaseHelper(context, DataBaseHelper.NONE_DB);
                                     SQLiteDatabase sqldb = dbh.getWritableDatabase();
@@ -333,6 +333,8 @@ public class GDriveHelper implements EasyPermissions.PermissionCallbacks{
 
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

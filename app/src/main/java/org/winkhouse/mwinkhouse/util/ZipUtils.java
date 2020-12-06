@@ -1,135 +1,194 @@
 package org.winkhouse.mwinkhouse.util;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.content.Context;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.util.zip.ZipInputStream;
+
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.model.FileHeader;
+import net.lingala.zip4j.model.ZipParameters;
+import net.lingala.zip4j.model.enums.AesKeyStrength;
+import net.lingala.zip4j.model.enums.EncryptionMethod;
+
 
 public class ZipUtils{
-	
-	private List<String> fileList;
-	private String sourceFolder;
-	private String outputFile;
-	
-	public ZipUtils(String sourceFolder, String outputFile){
-		
-	   fileList = new ArrayList<String>();
-	   this.sourceFolder = sourceFolder;
-	   this.outputFile = outputFile;
-	   
-	}
-	
-	public void zipDirectory(){
-	   
-	   generateFileList(new File(sourceFolder));
-	   zipIt(outputFile);
-	   
-	}
-	
-	public void zipIt(String zipFile){
-		
-	   byte[] buffer = new byte[1024];
-	   String source = "";
-	   FileOutputStream fos = null;
-	   ZipOutputStream zos = null;
-	   FileInputStream in = null;
-	   try
-	   {
-	     fos = new FileOutputStream(zipFile);
-	     zos = new ZipOutputStream(fos);
-	
-	     System.out.println("Output to Zip : " + zipFile);	     
-	
-	     for (String file : this.fileList)
-	     {
-	         ZipEntry ze = new ZipEntry((file.startsWith(File.separator)?file.substring(1):file));
-	         zos.putNextEntry(ze);
-	        try
-	        {
-				if (sourceFolder.lastIndexOf(File.separator) == sourceFolder.length()-1) {
-					in = new FileInputStream(sourceFolder + file);
-				}else {
-					in = new FileInputStream(sourceFolder + File.separator + file);
-				}
 
-	           	int len;
-	           	while ((len = in.read(buffer)) > 0)
-	           	{
-	            	zos.write(buffer, 0, len);
-	           	}
-	        }catch (Exception e){
-				e.printStackTrace();
+    private SharedPreferences sharedPref = null;
+
+    public ZipUtils(Context context){
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+	public boolean unZip4jArchivio(String pathZipFile,String unzipPath){
+		
+		boolean returnValue = true;
+		HashMap<String,String> dircreated = new HashMap();
+		try {
+			
+			ZipFile zf = new ZipFile(new File(pathZipFile));
+			if (zf.isEncrypted()){
+                String cryptKey = sharedPref.getString(SysSettingNames.ZIPPASSWORD,"");
+				zf.setPassword(cryptKey.toCharArray());
 			}
-	        finally
-	        {
-	           in.close();
+			@SuppressWarnings("unchecked")
+	        List<FileHeader> fileHeaders = zf.getFileHeaders();
+
+	        for(FileHeader fileHeader : fileHeaders) {
+	        	if (fileHeader.isDirectory()) {
+	        		zf.extractFile(fileHeader, unzipPath);
+	            }
 	        }
-	     }
-	
-	     zos.closeEntry();
-	
-	  }
-	  catch (IOException ex)
-	  {
-	     ex.printStackTrace();
-	  }
-	  finally
-	  {
-	     try
-	     {
-	        zos.close();
-	     }
-	     catch (Exception e)
-	     {
-	        e.printStackTrace();
-	     }
-	     try
-	     {
-	        fos.close();
-	     }
-	     catch (Exception e)
-	     {
-	        e.printStackTrace();
-	     }
-	     try
-	     {
-	        in.close();
-	     }
-	     catch (Exception e)
-	     {
-	        e.printStackTrace();
-	     }
-	     
-	     
-	  }
+			zf.extractAll(unzipPath);
+		} catch (IOException e) {
+			returnValue = false;
+			e.printStackTrace();
+		} catch (Exception e) {
+			returnValue = false;
+			e.printStackTrace();
+		}
+		
+		return returnValue;
+		
 	}
+
+	public boolean zip4jArchivio(String pathtozip, String pathzipfile){
+		
+		boolean returnValue = true;
+		
+		try {
+            String cryptKey = sharedPref.getString(SysSettingNames.ZIPPASSWORD,"");
+			ZipFile zf = new ZipFile(pathzipfile);
+			ZipParameters zipParameters = new ZipParameters();
+			
+			File f_pathtozip = new File(pathtozip);
+			if (f_pathtozip.isDirectory()){
+				
+				if (!cryptKey.equalsIgnoreCase("")){
+					zipParameters.setEncryptFiles(true);
+					zipParameters.setEncryptionMethod(EncryptionMethod.AES);
+					zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
+					zf.setPassword(cryptKey.toCharArray());
+				
+				}
+				File[] files = f_pathtozip.listFiles();
+				for (int i = 0; i < files.length; i++) {
+					if (files[i].isDirectory()){
+						if (!cryptKey.equalsIgnoreCase("")){
+							zf.addFolder(files[i], zipParameters);		
+						}else{
+							zf.addFolder(files[i]);
+						}
+					}else{
+						if (!cryptKey.equalsIgnoreCase("")){
+							zf.addFile(files[i], zipParameters);		
+						}else{
+							zf.addFile(files[i]);
+						}
+		
+					}
+				}
+					
+				
+				
+			}else{
+				if (!cryptKey.equalsIgnoreCase("")){
+					zipParameters.setEncryptFiles(true);
+					zipParameters.setEncryptionMethod(EncryptionMethod.AES);
+					zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
+					zf.setPassword(cryptKey.toCharArray());
+					zf.addFile(f_pathtozip,zipParameters);
+				}else{
+					zf.addFile(f_pathtozip);
+				}
+			}
+			
+		} catch (IOException e) {
+			returnValue = false;
+			e.printStackTrace();
+		} catch (Exception e) {
+			returnValue = false;
+			e.printStackTrace();
+		}
+		
+		return returnValue;
+		
+	} 
 	
-	public void generateFileList(File node)
-	{
+	public boolean unZipArchivio(String pathZipFile,String unzipPath){
 	
-	  // add file only
-	  if (node.isFile())
-	  {
-	     fileList.add(generateZipEntry(node.toString()));
-	
-	  }
-	
-	  if (node.isDirectory())
-	  {
-	     String[] subNote = node.list();
-	     for (String filename : subNote)
-	     {
-	        generateFileList(new File(node, filename));
-	     }
-	  }
+		boolean returnValue = true;
+				
+	    try {
+	        File f = new File(unzipPath);
+	        if(!f.isDirectory()) {
+	            f.mkdirs();
+	        }
+	        FileInputStream fis = new FileInputStream(pathZipFile);
+	        ZipInputStream zin = new ZipInputStream(fis);
+	        
+	        try {
+	            ZipEntry ze = null;
+	            while ((ze = zin.getNextEntry()) != null) {
+	            		            	
+	            	String filename = ze.getName().substring(ze.getName().lastIndexOf("\\")+1);
+	            		            	
+	                String path = unzipPath + File.separator + filename;
+	                
+	                	            	                
+	                if (!ze.getName().endsWith("xml")){	     
+	                	
+	                	File fpath = new File (ze.getName());
+	                	String dirpath = unzipPath + File.separator + fpath.getParentFile();
+	                	File dirpathfile = new File(dirpath);
+	                	dirpathfile.mkdirs();
+	                	path = dirpath + File.separator + filename;
+	                }
+	                
+                    FileOutputStream fout = new FileOutputStream(path, false);
+                    try {
+                        for (int c = zin.read(); c != -1; c = zin.read()) {
+                            fout.write(c);
+                        }
+                        zin.closeEntry();
+                    }
+                    finally {
+                        fout.close();
+                    }
+                    
+	            }
+	        }catch(Exception e){
+	        	//e.printStackTrace();
+	        	returnValue = false;				
+	            zin.close();
+	            zin = null;
+	            fis.close();
+	            fis = null;
+	        	
+	        }
+	        finally {
+	            zin.close();
+	            zin = null;
+	            fis.close();
+	            fis = null;
+	        }
+	    }
+	    catch (Exception e) {
+	    	returnValue = false;
+			
+	    }		
+		
+		return returnValue;
 	}
-	
-	private String generateZipEntry(String file){
-	   return file.substring(sourceFolder.length(), file.length());
-	}
-	
+
+
 }    
+

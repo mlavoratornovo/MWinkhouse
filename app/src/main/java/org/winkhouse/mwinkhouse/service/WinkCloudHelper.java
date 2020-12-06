@@ -53,7 +53,7 @@ public class WinkCloudHelper {
                 for (int i = 0; i < queryResponseData.length; i++) {
 
                     downfilename = queryResponseData[i].filename;
-                    ExportSearchParamsHelper esph = new ExportSearchParamsHelper();
+                    ExportSearchParamsHelper esph = new ExportSearchParamsHelper(null);
                     File download = new File(esph.getCloudSearchDirectory() + File.separator + downfilename);
 
                     if (httpHelper.downloadResponse(this.context, code, queryResponseData[i].idfile, download)) {
@@ -67,14 +67,17 @@ public class WinkCloudHelper {
                         String unzipFolder = esph.getCloudSearchDirectory() + File.separator + downfilename.replace(".zip", "");
                         File fUnzipFolder = new File(unzipFolder);
 
-                        WirelessImportDataHelper widh = new WirelessImportDataHelper(unzipFolder);
+                        WirelessImportDataHelper widh = new WirelessImportDataHelper(unzipFolder, true);
                         widh.setContext(this.context);
 
-                        File destination = new File(Environment.getExternalStorageDirectory() +
+                        String destpath = Environment.getExternalStorageDirectory() +
                                 File.separator +
                                 "winkhouse" +
                                 File.separator +
-                                downfilename);
+                                "searchC" +
+                                File.separator +
+                                downfilename;
+                        File destination = new File(destpath);
 
                         if (widh.getDataUpdateMode().equalsIgnoreCase(WirelessImportDataHelper.UPDATE_METHOD_SOVRASCRIVI)) {
                             widh.deleteImportDirContent(new File(widh.getImportDirectory()),
@@ -88,9 +91,9 @@ public class WinkCloudHelper {
 
                         SDFileSystemUtils sdfsu = new SDFileSystemUtils();
 
-                        if (sdfsu.copyFile(download, destination)) {
+//                        if (sdfsu.copyFile(download, destination)) {
 
-                            if (widh.unZipArchivioWireless(null, null, downfilename)) {
+                            if (widh.unZipArchivioWireless(this.context, null, null, destpath)) {
 
                                 DataBaseHelper dbh = new DataBaseHelper(context, DataBaseHelper.NONE_DB);
                                 SQLiteDatabase sqldb = dbh.getWritableDatabase();
@@ -137,11 +140,11 @@ public class WinkCloudHelper {
                             } else {
                                 result = true;
                             }
-
+/*
                         } else {
                             result = true;
                         }
-
+*/
                     }
                 }
 
@@ -160,11 +163,18 @@ public class WinkCloudHelper {
                     destination.delete();
                 }
 
-                ExportSearchParamsHelper esph = new ExportSearchParamsHelper();
-                File download = new File(esph.getCloudSearchDirectory() + File.separator + downfilename);
+                ExportSearchParamsHelper esph = null;
+                try {
+                    esph = new ExportSearchParamsHelper(null);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                if (esph != null) {
+                    File download = new File(esph.getCloudSearchDirectory() + File.separator + downfilename);
 
-                if (download.exists()) {
-                    download.delete();
+                    if (download.exists()) {
+                        download.delete();
+                    }
                 }
 
             }

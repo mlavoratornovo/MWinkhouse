@@ -17,6 +17,8 @@ public interface SysSettingNames {
 	String DATA_UPDATE_MODE = "updatemode";
 	String CLOUD_POLLING = "cloudpolling";
     String WINKCLOUDURL = "winkcloudurl";
+    String WINKCLOUDURLVALUE = "http://www.winkcloudquery.org";
     String WINKCLOUDID = "winkcloudurlid";
+    String ZIPPASSWORD = "zippws";
 	
 }

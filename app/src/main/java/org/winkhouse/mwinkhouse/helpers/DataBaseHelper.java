@@ -255,7 +255,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		
 		while (it.hasNext()) {
 			
-			SearchParam searchParam = (SearchParam) it.next();
+			SearchParam searchParam = it.next();
 			if ((searchParam.getValue_a() != null) && 
 				(searchParam.getValue_da() != null)){
 				
@@ -1318,18 +1318,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 			try {
 				UPDATEQUERY = "UPDATE COLLOQUI " + 
 									  "SET DESCRIZIONE = '" + colloquio.getDescrizione() + "', " + 
-									  "CODAGENTEINSERITORE = " + String.valueOf(colloquio.getCodAgenteInseritore()) + ", " +
-									  "CODIMMOBILEABBINATO = " + String.valueOf(colloquio.getCodImmobileAbbinato()) + ", " +
-									  "CODTIPOLOGIACOLLOQUIO = " + String.valueOf(colloquio.getCodImmobileAbbinato()) + ", " +
+									  "CODAGENTEINSERITORE = " + colloquio.getCodAgenteInseritore() + ", " +
+									  "CODIMMOBILEABBINATO = " + colloquio.getCodImmobileAbbinato() + ", " +
+									  "CODTIPOLOGIACOLLOQUIO = " + colloquio.getCodImmobileAbbinato() + ", " +
 									  "DATAINSERIMENTO = '" + DateFormatUtils.getInstace().format_xml(colloquio.getDataInserimento()) + "', " + 
 									  "DATACOLLOQUIO = '" + DateFormatUtils.getInstace().format_xml(colloquio.getDataColloquio()) + "', " +
 									  "LUOGO  = '" + colloquio.getLuogoIncontro() + "', " +
 									  "SCADENZIERE = " + ((colloquio.getScadenziere())?"1":"0") + ", " +
 									  "COMMENTOAGENZIA = '" + colloquio.getCommentoAgenzia() + "', " +
 									  "COMMENTOCLIENTE = '" + colloquio.getCommentoCliente() + "', " +
-									  "CODPARENT = " + String.valueOf(colloquio.getCodParent()) + ", " +
+									  "CODPARENT = " + colloquio.getCodParent() + ", " +
 									  "ICALUID = '" + colloquio.getiCalUid() + "' " +
-									  "WHERE CODCOLLOQUIO = " + String.valueOf(colloquio.getCodColloquio());
+									  "WHERE CODCOLLOQUIO = " + colloquio.getCodColloquio();
 			} catch (Exception e1) {
 				Log.e("WINKHOUSEUPDATECOLLOQUIO", UPDATEQUERY);
 			}
@@ -1702,7 +1702,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	public void deleteColloquio(Integer codColloquio){
 		
 		SQLiteDatabase wdb = (this.sqllitedb == null)?getWritableDatabase():this.sqllitedb;
-		String DELETEQUERY = "DELETE FROM COLLOQUI WHERE CODCOLLOQUIO = " + String.valueOf(codColloquio);
+		String DELETEQUERY = "DELETE FROM COLLOQUI WHERE CODCOLLOQUIO = " + codColloquio;
 		
 		try {
 			wdb.execSQL(DELETEQUERY);
@@ -2315,7 +2315,54 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		
 	}
 
-	public ArrayList<ColloquiVO> getColloquiImmobile(Integer codImmobile,HashMap column_list){
+    public ArrayList<ColloquiAnagraficheVO> getColloquiAnagraficheByCodAnagrafica(Integer codAnagrafica,HashMap column_list){
+
+        String query = "SELECT * FROM COLLOQUIANAGRAFICHE CA WHERE CA.CODANAGRAFICA = ?";
+
+        ArrayList<ColloquiAnagraficheVO> returnValue = new ArrayList<ColloquiAnagraficheVO>();
+        SQLiteDatabase rdb = (this.sqllitedb == null)?getReadableDatabase():this.sqllitedb;
+        Cursor c = rdb.rawQuery(query, new String[]{codAnagrafica.toString()});
+        while(c.moveToNext()){
+            try {
+                returnValue.add(new ColloquiAnagraficheVO(c, column_list));
+            } catch (SQLException e) {
+
+            }
+        }
+        c.close();
+        if (this.sqllitedb == null){
+            // rdb.close();
+        }
+
+        return returnValue;
+
+    }
+
+    public ArrayList<ColloquiAnagraficheVO> getColloquiAnagraficheByCodColloquio(Integer codColloquio, HashMap column_list){
+
+        String query = "SELECT * FROM COLLOQUIANAGRAFICHE CA WHERE CA.CODCOLLOQUIO = ?";
+
+        ArrayList<ColloquiAnagraficheVO> returnValue = new ArrayList<ColloquiAnagraficheVO>();
+        SQLiteDatabase rdb = (this.sqllitedb == null)?getReadableDatabase():this.sqllitedb;
+        Cursor c = rdb.rawQuery(query, new String[]{codColloquio.toString()});
+        while(c.moveToNext()){
+            try {
+                returnValue.add(new ColloquiAnagraficheVO(c, column_list));
+            } catch (SQLException e) {
+
+            }
+        }
+        c.close();
+        if (this.sqllitedb == null){
+            // rdb.close();
+        }
+
+        return returnValue;
+
+    }
+
+
+    public ArrayList<ColloquiVO> getColloquiImmobile(Integer codImmobile,HashMap column_list){
 		
 		ArrayList<ColloquiVO> returnValue = new ArrayList<ColloquiVO>();
 		SQLiteDatabase rdb = (this.sqllitedb == null)?getReadableDatabase():this.sqllitedb;

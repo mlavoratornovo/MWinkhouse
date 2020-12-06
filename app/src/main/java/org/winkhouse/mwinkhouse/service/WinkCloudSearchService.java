@@ -46,114 +46,135 @@ public class WinkCloudSearchService extends IntentService {
 
         SDFileSystemUtils SDUtils = new SDFileSystemUtils();
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         int polling = Integer.valueOf(sharedPref.getString(SysSettingNames.CLOUD_POLLING, "30"));
         String code = sharedPref.getString(SysSettingNames.WINKCLOUDID, null);
+        if (code == null) {
+            NotificationHelper.getInstance().doNotificationBar(this,
+                    "ricerca cloud",
+                    "errore",
+                    "Inserire il WinkCloud ID su cui ricercare nelle impostazioni",
+                    123);
 
-        boolean doPolling = true;
-        ExportSearchParamsHelper esph = new ExportSearchParamsHelper();
-        String name = String.valueOf(new Date().getTime());
+        }else{
+            boolean doPolling = true;
+            ExportSearchParamsHelper esph = null;
+            try {
+                esph = new ExportSearchParamsHelper(null);
+            }catch (Exception e){
 
-        String pathWorkingFolder = "cloudsearch" + File.separator + name;
+            }
+            String name = String.valueOf(new Date().getTime());
 
-        File dummyF = new File(esph.getCloudSearchDirectory() + File.separator +pathWorkingFolder);
-        if (!dummyF.exists()) {
-            dummyF.mkdirs();
-        }
-        String pathrequestzipfile = null;
+            String pathWorkingFolder = "cloudsearch" + File.separator + name;
+            if (esph != null) {
+                File dummyF = new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder);
+                if (!dummyF.exists()) {
+                    dummyF.mkdirs();
+                }
+                String pathrequestzipfile = null;
 
-        HTTPHelper httpHelper = new HTTPHelper();
-        String basefilename = String.valueOf(new Date().getTime());
-        String zipfilename = basefilename;
-        pathrequestzipfile = pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename;
+                HTTPHelper httpHelper = new HTTPHelper();
+                String basefilename = String.valueOf(new Date().getTime());
+                String zipfilename = basefilename;
+                pathrequestzipfile = pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename;
 
-        try {
-            if (!new File(pathrequestzipfile + ".zip").exists()) {
+                try {
+                    if (!new File(pathrequestzipfile + ".zip").exists()) {
 
 
-                if ((intent.getExtras().containsKey(ActivityMessages.SEARCH_ACTION) &&
-                        intent.getExtras().containsKey(SearchParam.class.getName()))) {
+                        if ((intent.getExtras().containsKey(ActivityMessages.SEARCH_ACTION) &&
+                                intent.getExtras().containsKey(SearchParam.class.getName()))) {
 
-                    Parcelable[] obj_arr = intent.getExtras().getParcelableArray(SearchParam.class.getName());
-                    if (obj_arr != null) {
-                        int randomNo = intent.getExtras().getInt("randomNo");
+                            Parcelable[] obj_arr = intent.getExtras().getParcelableArray(SearchParam.class.getName());
+                            if (obj_arr != null) {
+                                int randomNo = intent.getExtras().getInt("randomNo");
 
-                        intent.getExtras().remove(SearchParam.class.getName());
+                                intent.getExtras().remove(SearchParam.class.getName());
 
-                        ArrayList<SearchParam> al_params = new ArrayList<SearchParam>();
+                                ArrayList<SearchParam> al_params = new ArrayList<SearchParam>();
 
-                        for (int i = 0; i < obj_arr.length; i++) {
-                            al_params.add((SearchParam) obj_arr[i]);
-                        }
-                        if (al_params.size() > 0) {
-
-                            String notificationmsg = "";
-                            for (SearchParam sp : al_params) {
-                                notificationmsg += sp.toString();
-                            }
-
-                            String xmlfilename = pathWorkingFolder + File.separator + "RicercheXMLModel.xml";
-                            if (esph.exportSearchParamToXML(al_params, xmlfilename)) {
-
-                                File f = new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename + ".zip");
-                                boolean fexist = true;
-                                if (!f.exists()){
-                                    fexist = f.createNewFile();
+                                for (int i = 0; i < obj_arr.length; i++) {
+                                    al_params.add((SearchParam) obj_arr[i]);
                                 }
+                                if (al_params.size() > 0) {
 
-                                if (fexist && esph.zipArchivio(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder,
-                                        esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename)) {
-
-                                    if (httpHelper.uploadQueryRequest(getApplicationContext(),
-                                            new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename + ".zip"),
-                                            code)) {
-                                        doPolling = true;
-                                        NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                al_params.get(0).getSearchType(),
-                                                "Ricerca cloud " + al_params.get(0).getSearchType(),
-                                                "Ricerca inviata " + notificationmsg,
-                                                randomNo);
-
-                                    } else {
-                                        NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                al_params.get(0).getSearchType(),
-                                                "Ricerca cloud " + al_params.get(0).getSearchType(),
-                                                "Impossibile inviare ricerca " + notificationmsg,
-                                                randomNo);
-
-                                        doPolling = false;
+                                    String notificationmsg = "";
+                                    for (SearchParam sp : al_params) {
+                                        notificationmsg += sp.toString() + " ";
                                     }
 
-                                    File fzip = new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename + ".zip");
-                                    try {
-                                        fzip.delete();
-                                    } catch (Exception e) {
-                                        fzip = null;
-                                    }
+                                    String xmlfilename = pathWorkingFolder + File.separator + "RicercheXMLModel.xml";
+                                    if (esph.exportSearchParamToXML(al_params, xmlfilename)) {
 
-                                    SDUtils.deleteFolder(new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder));
-
-                                    if (doPolling) {
-                                        boolean condition = true;
-                                        while (condition == true) {
-                                            condition = !doPolling(getApplicationContext(), randomNo, notificationmsg, esph.getCloudSearchDirectory(), zipfilename+ ".zip");
-                                            SystemClock.sleep(polling * 1000);
+                                        File f = new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename + ".zip");
+                                        if (f.exists()) {
+                                            f.delete();
                                         }
 
-                                        NotificationHelper.getInstance().doNotificationBar(getApplicationContext(),
-                                                al_params.get(0).getSearchType(),
-                                                "Ricerca cloud " + al_params.get(0).getSearchType(),
-                                                "Ricerca cloud conclusa " + notificationmsg,
-                                                randomNo);
+                                        if (esph.zipArchivio(this,esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder,
+                                                esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename)) {
+
+                                            if (httpHelper.uploadQueryRequest(this,
+                                                    new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename + ".zip"),
+                                                    code)) {
+                                                doPolling = true;
+                                                NotificationHelper.getInstance().doNotificationBar(this,
+                                                        al_params.get(0).getSearchType(),
+                                                        "Ricerca cloud " + al_params.get(0).getSearchType(),
+                                                        "Ricerca inviata " + notificationmsg,
+                                                        randomNo);
+
+                                            } else {
+                                                NotificationHelper.getInstance().doNotificationBar(this,
+                                                        al_params.get(0).getSearchType(),
+                                                        "Ricerca cloud " + al_params.get(0).getSearchType(),
+                                                        "Impossibile inviare ricerca " + notificationmsg,
+                                                        randomNo);
+
+                                                doPolling = false;
+                                            }
+
+                                            File fzip = new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder.split(File.separator)[0] + File.separator + zipfilename + ".zip");
+                                            try {
+                                                fzip.delete();
+                                            } catch (Exception e) {
+                                                fzip = null;
+                                            }
+
+                                            SDUtils.deleteFolder(new File(esph.getCloudSearchDirectory() + File.separator + pathWorkingFolder));
+
+                                            if (doPolling) {
+                                                boolean condition = true;
+                                                while (condition == true) {
+
+                                                    //condition = !doPolling(this, randomNo, notificationmsg, esph.getCloudSearchDirectory(), zipfilename + ".zip");
+                                                    condition = !doPolling(this, randomNo, notificationmsg, esph.getCloudSearchDirectory(), "1594449861198.zip");
+                                                    SystemClock.sleep(polling * 1000);
+                                                }
+
+                                                NotificationHelper.getInstance().doNotificationBar(this,
+                                                        al_params.get(0).getSearchType(),
+                                                        "Ricerca cloud " + al_params.get(0).getSearchType(),
+                                                        "Ricerca cloud conclusa " + notificationmsg,
+                                                        randomNo);
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            }else{
+                NotificationHelper.getInstance().doNotificationBar(this,
+                        "ricerca cloud",
+                        "errore",
+                        "Ricerca cloud conclusa errore sconosciuto",
+                         123);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -161,7 +182,7 @@ public class WinkCloudSearchService extends IntentService {
 
         boolean returnValue = false;
 
-        WinkCloudHelper fph = new WinkCloudHelper(getApplicationContext(),randomNo,notificationmsg);
+        WinkCloudHelper fph = new WinkCloudHelper(this,randomNo,notificationmsg);
 
         return fph.pollingResult(filename);
 

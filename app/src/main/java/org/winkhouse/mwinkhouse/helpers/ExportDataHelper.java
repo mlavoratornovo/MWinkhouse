@@ -55,15 +55,41 @@ import android.content.Context;
 import android.os.Environment;
 
 public class ExportDataHelper {
-	
 
-	private String importDirectory = null;	
-	private String exportDirectory = null;
+    private ArrayList itemsToExport = null;
+    public final static int EXPORT_TYPE_IMMOBILI = 0;
+    public final static int EXPORT_TYPE_ANAGRAFICHE = 1;
+    private int exportType = -1;
+
+	private String importDirectory = null;
+
+    public void setImportDirectory(String importDirectory) {
+        this.importDirectory = importDirectory;
+    }
+
+    public void setExportDirectory(String exportDirectory) {
+        this.exportDirectory = exportDirectory;
+    }
+
+    private String exportDirectory = null;
 	
-	
-	public ExportDataHelper(){
-		importDirectory = Environment.getExternalStorageDirectory() + File.separator + "winkhouse/import";
-		exportDirectory = Environment.getExternalStorageDirectory() + File.separator + "winkhouse/export";
+	public ExportDataHelper(ArrayList itemsToExport) throws  Exception{
+        this.itemsToExport = itemsToExport;
+        if (itemsToExport != null && itemsToExport.size() > 0){
+            if (itemsToExport.get(0) instanceof ImmobiliVO){
+                exportType = EXPORT_TYPE_IMMOBILI;
+            }else if (itemsToExport.get(0) instanceof AnagraficheVO){
+                exportType = EXPORT_TYPE_ANAGRAFICHE;
+            }else{
+                throw new Exception("Elementi da esportare sconosciuti");
+            }
+        }
+//        else{
+//            throw new Exception("Nessun elemento da esportare");
+//        }
+
+//		importDirectory = Environment.getExternalStorageDirectory() + File.separator + "winkhouse/import";
+//		exportDirectory = Environment.getExternalStorageDirectory() + File.separator + "winkhouse/export" + File.separator + "tmp";
 	}
 	
 	protected boolean exportSelection(Object obj,String fileName){
@@ -181,29 +207,50 @@ public class ExportDataHelper {
 		
 	}
 	
-	public void exportImmobiliToXML(DataBaseHelper sqldb){
-		ArrayList<ImmobiliVO> ivos = sqldb.getAllImmobili(null);
-		exportSelection(ivos, ImportDataHelper.IMMOBILI_FILENAME);				
+	public void exportImmobiliToXML(DataBaseHelper sqldb, Context c){
+        if (exportType == EXPORT_TYPE_IMMOBILI) {
+            exportSelection(itemsToExport, ImportDataHelper.IMMOBILI_FILENAME);
+        }
+
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE) {
+
+            ArrayList itemsToExport = new ArrayList();
+
+            for (Object anagrafica : itemsToExport){
+
+                itemsToExport.addAll(((AnagraficheVO)anagrafica).getImmobiliPropietari(c, null));
+
+            }
+
+            exportSelection(itemsToExport, ImportDataHelper.IMMOBILI_FILENAME);
+        }
 	} 
 
-	public void exportAnagraficheToXML(DataBaseHelper sqldb){
-		ArrayList<AnagraficheVO> ivos = sqldb.getAllAnagrafiche(null);
-		exportSelection(ivos, ImportDataHelper.ANAGRAFICHE_FILENAME);				
+	public void exportAnagraficheToXML(DataBaseHelper sqldb, Context c){
+
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE) {
+            exportSelection(itemsToExport, ImportDataHelper.IMMOBILI_FILENAME);
+        }
+
+        if (exportType == EXPORT_TYPE_IMMOBILI) {
+
+            ArrayList itemsToExport = new ArrayList();
+
+            for (Object immobile : itemsToExport){
+
+                itemsToExport.addAll(((ImmobiliVO)immobile).getAnagrafichePropietarie(c, null));
+
+            }
+
+            exportSelection(itemsToExport, ImportDataHelper.IMMOBILI_FILENAME);
+        }
+
 	}
 	
 	public void exportAgentiToXML(DataBaseHelper sqldb){
-		
-		File f_agenti = new File(importDirectory + File.separator + ImportDataHelper.AGENTI_FILENAME);
-		File f_agenti_export = new File(exportDirectory + File.separator + ImportDataHelper.AGENTI_FILENAME);
-		
-		try {
-			copy(f_agenti, f_agenti_export);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-				
+
+        exportSelection(new ArrayList<AgentiVO>(), ImportDataHelper.AGENTI_FILENAME);
+
 	} 
 
 	public void exportClasseEnergeticaToXML(DataBaseHelper sqldb){
@@ -213,17 +260,9 @@ public class ExportDataHelper {
 	} 
 
 	public void exportAbbinamentiToXML(DataBaseHelper sqldb){
-		
-		File f_abbinamenti = new File(importDirectory + File.separator + ImportDataHelper.ABBINAMENTI_FILENAME);
-		File f_abbinamenti_export = new File(exportDirectory + File.separator + ImportDataHelper.ABBINAMENTI_FILENAME);
-		
-		try {
-			copy(f_abbinamenti, f_abbinamenti_export);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-				
+
+	    exportSelection(new ArrayList<AbbinamentiVO>(), ImportDataHelper.ABBINAMENTI_FILENAME);
+
 	} 
 
 	public void exportClassiClienteToXML(DataBaseHelper sqldb){
@@ -256,54 +295,159 @@ public class ExportDataHelper {
 			
 		ArrayList<TipologieImmobiliVO> tiVOs = sqldb.getAllTipologieImmobili(null);
 		exportSelection(tiVOs, ImportDataHelper.TIPOLOGIAIMMOBILI_FILENAME);
+
 	} 
 	
 	public void exportTipologiaStanzeToXML(DataBaseHelper sqldb){
-		
-		File f_tipistanze = new File(importDirectory + File.separator + ImportDataHelper.TIPOLOGIASTANZE_FILENAME);
-		File f_tipistanze_export = new File(exportDirectory + File.separator + ImportDataHelper.TIPOLOGIASTANZE_FILENAME);
-		
-		try {
-			copy(f_tipistanze, f_tipistanze_export);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		ArrayList<TipologiaStanzeVO> alts = sqldb.getAllTipiStanze(null);
+        exportSelection(alts, ImportDataHelper.TIPOLOGIASTANZE_FILENAME);
 
 	} 
 
-	public void exportContattiToXML(DataBaseHelper sqldb){
-		ArrayList<ContattiVO> cVOs = sqldb.getAllContatti(null);
+	public void exportContattiToXML(DataBaseHelper sqldb, Context c){
+
+        ArrayList<ContattiVO> cVOs = new ArrayList<ContattiVO>();
+
+        if (exportType == EXPORT_TYPE_IMMOBILI) {
+
+            for (Object immobile : itemsToExport){
+
+                ArrayList<AnagraficheVO> ala = ((ImmobiliVO)immobile).getAnagrafichePropietarie(c, null);
+                for (AnagraficheVO avo : ala){
+                    cVOs.addAll(sqldb.getContattiAnagrafica(avo.getCodAnagrafica(),null));
+                }
+
+            }
+
+        }
+
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE) {
+
+            for (Object anagrafica : itemsToExport){
+
+                cVOs.addAll(sqldb.getContattiAnagrafica(((AnagraficheVO)anagrafica).getCodAnagrafica(),null));
+
+            }
+
+        }
+
 		exportSelection(cVOs, ImportDataHelper.CONTATTI_FILENAME);				
 	} 
 
 	public void exportDatiCatastaliToXML(DataBaseHelper sqldb){
 
-		File f_daticatastali = new File(importDirectory + File.separator + ImportDataHelper.DATICATASTALI_FILENAME);
-		File f_daticatastali_export = new File(exportDirectory + File.separator + ImportDataHelper.DATICATASTALI_FILENAME);
-		
-		try {
-			copy(f_daticatastali, f_daticatastali_export);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-				
+        exportSelection(new ArrayList<DatiCatastaliVO>(), ImportDataHelper.DATICATASTALI_FILENAME);
+
 	} 
 
-	public void exportImmaginiToXML(DataBaseHelper sqldb){
-		ArrayList<ImmagineVO> iVOs = sqldb.getAllImmagini(null);
-		exportSelection(iVOs, ImportDataHelper.IMMAGINE_FILENAME);				
-	}
-	
-	public void copyImmaginiFolder(){
+	public void exportImmaginiToXML(DataBaseHelper sqldb, Context c){
 
-		File f_immagini 		= new File(importDirectory + File.separator + "immagini");
-		File f_immagini_export 	= new File(exportDirectory + File.separator + "immagini");
-		
-		if (f_immagini.exists()){
-			copyFolder(f_immagini, f_immagini_export);
-		}
-		
+        ArrayList<ImmagineVO> iVOs = new ArrayList<ImmagineVO>();
+
+        if (exportType == EXPORT_TYPE_IMMOBILI) {
+            for (Object ivo : itemsToExport){
+                iVOs.addAll(sqldb.getImmaginiImmobile(((ImmobiliVO)ivo).getCodImmobile(), null));
+            }
+        }
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE) {
+            for (Object ivo : itemsToExport){
+                ArrayList<ImmobiliVO> alimms = ((AnagraficheVO)ivo).getImmobiliPropietari(c,null);
+                for (ImmobiliVO iVO : alimms){
+                    iVOs.addAll(sqldb.getImmaginiImmobile(iVO.getCodImmobile(), null));
+                }
+            }
+        }
+
+		exportSelection(iVOs, ImportDataHelper.IMMAGINE_FILENAME);
+	}
+
+    public void exportColloquiAgentiVOToXML(DataBaseHelper sqldb, Context c){
+
+	    ArrayList<ColloquiAgentiVO> alca = new ArrayList<ColloquiAgentiVO>();
+	    exportSelection(alca, ImportDataHelper.COLLOQUIAGENTI_FILENAME);
+
+    }
+
+    public void exportColloquiAnagraficheVOToXML(DataBaseHelper sqldb, Context c){
+
+        ArrayList<ColloquiAnagraficheVO> caVOs = new ArrayList<ColloquiAnagraficheVO>();
+
+        if (exportType == EXPORT_TYPE_IMMOBILI) {
+            for (Object ivo : itemsToExport){
+                ArrayList<ColloquiVO> alc = sqldb.getColloquiImmobile(((ImmobiliVO)ivo).getCodImmobile(), null);
+                for (ColloquiVO cVO : alc){
+                    caVOs.addAll(sqldb.getColloquiAnagraficheByCodColloquio(cVO.getCodColloquio(), null));
+                }
+            }
+        }
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE) {
+            for (Object ivo : itemsToExport){
+                ArrayList<ColloquiVO> alc = sqldb.getColloquiAnagrafica(((AnagraficheVO)ivo).getCodAnagrafica(), null);
+                for (ColloquiVO cVO : alc){
+                    caVOs.addAll(sqldb.getColloquiAnagraficheByCodColloquio(cVO.getCodColloquio(), null));
+                }
+            }
+        }
+
+        exportSelection(caVOs, ImportDataHelper.COLLOQUIANAGRAFICHE_FILENAME);
+
+    }
+
+    public void exportColloquiVOToXML(DataBaseHelper sqldb, Context c){
+
+        ArrayList<ColloquiVO> cVOs = new ArrayList<ColloquiVO>();
+
+        if (exportType == EXPORT_TYPE_IMMOBILI) {
+            for (Object ivo : itemsToExport){
+                cVOs.addAll(sqldb.getColloquiImmobile(((ImmobiliVO)ivo).getCodImmobile(), null));
+            }
+        }
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE) {
+            for (Object ivo : itemsToExport){
+                cVOs.addAll(sqldb.getColloquiAnagrafica(((AnagraficheVO)ivo).getCodAnagrafica(), null));
+            }
+        }
+
+        exportSelection(cVOs, ImportDataHelper.COLLOQUIANAGRAFICHE_FILENAME);
+
+    }
+	
+	public void copyImmaginiFolder(DataBaseHelper sqldb, Context c){
+
+        ArrayList<ImmagineVO> iVOs = new ArrayList<ImmagineVO>();
+
+        if (exportType == EXPORT_TYPE_IMMOBILI) {
+            for (Object ivo : itemsToExport){
+                iVOs.addAll(sqldb.getImmaginiImmobile(((ImmobiliVO)ivo).getCodImmobile(), null));
+            }
+        }
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE) {
+            for (Object ivo : itemsToExport){
+                ArrayList<ImmobiliVO> alimms = ((AnagraficheVO)ivo).getImmobiliPropietari(c,null);
+                for (ImmobiliVO iVO : alimms){
+                    iVOs.addAll(sqldb.getImmaginiImmobile(iVO.getCodImmobile(), null));
+                }
+            }
+        }
+
+        String rootImgPath = Environment.getExternalStorageDirectory() + File.separator + "winkhouse/immagini";
+        String rootImgExportPath = this.exportDirectory + File.separator + "immagini";
+
+        for (ImmagineVO iVO : iVOs){
+
+            File fexpFolder = new File(rootImgExportPath + File.separator + iVO.getCodImmobile().toString());
+            if (!fexpFolder.exists()) {
+                fexpFolder.mkdirs();
+                fexpFolder = null;
+            }
+            try {
+                copy(new File(rootImgPath + File.separator + iVO.getCodImmobile().toString() + File.separator + iVO.getCodImmagine()),
+                     new File(rootImgExportPath + File.separator + iVO.getCodImmobile().toString() + File.separator + iVO.getCodImmagine()));
+            }catch (Exception ex){}
+
+        }
+
 	}
 	
 	protected void copyFolder(File folderOrigin, File folderDest){
@@ -335,97 +479,130 @@ public class ExportDataHelper {
 	
 	protected void deleteFolder(File folder){
 		
-		File[] items = folder.listFiles();
+		String[] items = folder.list();
 		if (items != null){
 			for (int i = 0; i < items.length; i++) {
-				if (items[i].isFile()){
-					items[i].delete();
-				}else{
-					deleteFolder(items[i]);
+			    File f = new File(folder.toPath() + File.separator +items[i]);
+				if (f.isFile()){
+					f.delete();
+				}else if (f.listFiles().length == 0) {
+				    f.delete();
+                }else{
+					deleteFolder(f);
 				}
 			}
 		}
+		folder.delete();
 		
 	}
 	
-	public void exportStanzeImmobiliToXML(DataBaseHelper sqldb){
-		
-		File f_stanze = new File(importDirectory + File.separator + ImportDataHelper.STANZEIMMOBILI_FILENAME);
-		File f_stanze_export = new File(exportDirectory + File.separator + ImportDataHelper.STANZEIMMOBILI_FILENAME);
-		
-		try {
-			copy(f_stanze, f_stanze_export);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-				
+	public void exportStanzeImmobiliToXML(DataBaseHelper sqldb, Context c){
+
+        ArrayList<StanzeImmobiliVO> alst = new ArrayList<StanzeImmobiliVO>();
+        if (exportType == EXPORT_TYPE_IMMOBILI){
+
+            for (Object o : itemsToExport){
+                alst.addAll(sqldb.getStanzeImmobile(null,((ImmobiliVO)o).getCodImmobile()));
+            }
+
+        }
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE){
+
+            for (Object o : itemsToExport){
+
+                ArrayList<ImmobiliVO> alivo = ((AnagraficheVO)o).getImmobiliPropietari(c, null);
+                for (ImmobiliVO ivo : alivo){
+                    alst.addAll(sqldb.getStanzeImmobile(null,ivo.getCodImmobile()));
+                }
+
+            }
+
+        }
+
+        exportSelection(alst, ImportDataHelper.STANZEIMMOBILI_FILENAME);
+
 	} 
 	
 	public void exportEntityToXML(DataBaseHelper sqldb){
-		
-		File f_entity = new File(importDirectory + File.separator + ImportDataHelper.ENTITA_FILENAME);
-		File f_entity_export = new File(exportDirectory + File.separator + ImportDataHelper.ENTITA_FILENAME);
-		
-		try {
-			copy(f_entity, f_entity_export);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
+        exportSelection(new ArrayList<EntityVO>(), ImportDataHelper.ENTITA_FILENAME);
+
 	} 
 
 	public void exportAttributeToXML(DataBaseHelper sqldb){
 
-		File f_attribute = new File(importDirectory + File.separator + ImportDataHelper.ATTRIBUTI_FILENAME);
-		File f_attribute_export = new File(exportDirectory + File.separator + ImportDataHelper.ATTRIBUTI_FILENAME);
-		
-		try {
-			copy(f_attribute, f_attribute_export);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        exportSelection(new ArrayList<AttributeVO>(), ImportDataHelper.ATTRIBUTI_FILENAME);
 
 	} 
 
 	public void exportAttributeValueToXML(DataBaseHelper sqldb){
 
-		File f_attributevalue = new File(importDirectory + File.separator + ImportDataHelper.VALOREATTRIBUTO_FILENAME);
-		File f_attributevalue_export = new File(exportDirectory + File.separator + ImportDataHelper.VALOREATTRIBUTO_FILENAME);
-		
-		try {
-			copy(f_attributevalue, f_attributevalue_export);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+        exportSelection(new ArrayList<AttributeValueVO>(), ImportDataHelper.VALOREATTRIBUTO_FILENAME);
+
 	}
 	
 	public void exportImmobiliPropietariToXML(DataBaseHelper sqldb,Context c){
 		
 		ArrayList<ImmobiliPropietariVO> al_immobiliPropietari = new ArrayList<ImmobiliPropietariVO>();
-		
-		ArrayList<ImmobiliVO> alimvos = sqldb.getAllImmobili(null);
-		
-		for (ImmobiliVO immobiliVO : alimvos) {
-			
-			ArrayList<AnagraficheVO> alavos = immobiliVO.getAnagrafichePropietarie(c, null);
-			
-			for (AnagraficheVO anagraficheVO : alavos) {
-				
-				ImmobiliPropietariVO ipvo = new ImmobiliPropietariVO();
-				
-				ipvo.setCodImmobile(immobiliVO.getCodImmobile());
-				ipvo.setCodAnagrafica(anagraficheVO.getCodAnagrafica());
-				
-				al_immobiliPropietari.add(ipvo);
-				
-			}
-			
-		}
+
+		if (exportType == EXPORT_TYPE_IMMOBILI){
+
+		    for (Object immobile : itemsToExport){
+
+                ArrayList<AnagraficheVO> alavos = sqldb.getAnagrafichePropietarie(null, ((ImmobiliVO)immobile).getCodImmobile());
+
+                for (AnagraficheVO anagraficheVO : alavos) {
+
+                    ImmobiliPropietariVO ipvo = new ImmobiliPropietariVO();
+
+                    ipvo.setCodImmobile(((ImmobiliVO)immobile).getCodImmobile());
+                    ipvo.setCodAnagrafica(anagraficheVO.getCodAnagrafica());
+
+                    al_immobiliPropietari.add(ipvo);
+
+                }
+
+            }
+        }
+        if (exportType == EXPORT_TYPE_ANAGRAFICHE){
+
+            for (Object anagrafica : itemsToExport){
+
+                ArrayList<ImmobiliVO> alavos = ((AnagraficheVO)anagrafica).getImmobiliPropietari(c, null);
+
+                for (ImmobiliVO iVO : alavos) {
+
+                    ImmobiliPropietariVO ipvo = new ImmobiliPropietariVO();
+
+                    ipvo.setCodImmobile(iVO.getCodImmobile());
+                    ipvo.setCodAnagrafica(((AnagraficheVO)anagrafica).getCodAnagrafica());
+
+                    al_immobiliPropietari.add(ipvo);
+
+                }
+
+            }
+
+        }
+
+//		ArrayList<ImmobiliVO> alimvos = sqldb.getAllImmobili(null);
+//
+//		for (ImmobiliVO immobiliVO : alimvos) {
+//
+//			ArrayList<AnagraficheVO> alavos = immobiliVO.getAnagrafichePropietarie(c, null);
+//
+//			for (AnagraficheVO anagraficheVO : alavos) {
+//
+//				ImmobiliPropietariVO ipvo = new ImmobiliPropietariVO();
+//
+//				ipvo.setCodImmobile(immobiliVO.getCodImmobile());
+//				ipvo.setCodAnagrafica(anagraficheVO.getCodAnagrafica());
+//
+//				al_immobiliPropietari.add(ipvo);
+//
+//			}
+//
+//		}
 		
 		exportSelection(al_immobiliPropietari, ImportDataHelper.IMMOBILIPROPIETARI_FILENAME);
 		

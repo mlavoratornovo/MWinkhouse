@@ -16,7 +16,13 @@
         android:key="imagequality"        
         android:defaultValue="100" />
 
-	<PreferenceCategory
+    <EditTextPreference android:title="Password zip"
+        android:summary="password da usare per zip/unzip"
+        android:key="zippws"
+        android:inputType="textPassword">
+    </EditTextPreference>
+
+    <PreferenceCategory
 		android:title="Ricerca Cloud"
 		android:key="pref_key_storage_settings">
 
@@ -81,10 +87,6 @@
             android:title="WINKCLOUDQUERY"
             android:persistent="false">
 
-        <EditTextPreference android:title="Url winkcloudquery"
-                            android:summary="inserire url winkcloudquery"
-                            android:key="winkcloudurl">
-        </EditTextPreference>
         <EditTextPreference android:title="winkcloud ID"
                             android:summary="inserire ID winkcloud"
                             android:key="winkcloudurlid">

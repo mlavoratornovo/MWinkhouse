@@ -13,31 +13,20 @@
     			  android:paddingLeft="10dp"
     			  android:paddingRight="10dp">
 			
-			<TextView android:id="@+id/labelServerIp"
+			<TextView android:id="@+id/labelPercorsoZip"
 		        	  android:layout_width="match_parent" 
 					  android:layout_height="wrap_content"
-					  android:text="IP Winkhuose"
+					  android:text="File zip da importare"
 					  android:textColor="@color/label_blue"/>
 			
-		    <EditText android:id="@+id/ipWinkhouse"
+		    <EditText android:id="@+id/pathzipfile"
 		        	  android:layout_width="match_parent"
 		        	  android:layout_height="30dp"
 		        	  android:textColor="@color/text_white"
+                      android:singleLine="true"
 			          android:background="@drawable/edit_round_border"/>		
 			
-			<TextView android:id="@+id/labelPorta"
-		        	  android:layout_width="match_parent" 
-					  android:layout_height="wrap_content"
-					  android:text="Porta di ascolto"
-					  android:textColor="@color/label_blue"/>
-					
-		    <EditText
-		        android:id="@+id/porta"
-		        android:layout_width="match_parent"
-		        android:layout_height="30dp"
-		        android:textColor="@color/text_white"    	
-			    android:background="@drawable/edit_round_border"/>		
-	
+
 	</LinearLayout>
 	<LinearLayout 	android:orientation="horizontal"
     				android:layout_width="match_parent"
@@ -53,7 +42,7 @@
         		android:paddingRight="40dp">
     
    			<ImageButton
-   			    android:id="@+id/btn_salva"
+   			    android:id="@+id/btn_avvia"
    			    android:layout_width="wrap_content"
    			    android:layout_height="wrap_content"
 				android:scaleX="0.5"
@@ -100,32 +89,5 @@
 	         		android:layout_height="wrap_content"/>
 	    
  	</LinearLayout>
- 	
-	<LinearLayout 	android:orientation="vertical"
-    				android:layout_width="match_parent"
-    				android:layout_height="wrap_content"
-    				android:paddingLeft="10dp"
-    				android:paddingTop="10dp"    				
-    				android:paddingRight="10dp">
 
-	    <TextView android:id="@+id/bottom_label"
-		       	  android:layout_width="match_parent" 
-				  android:layout_height="wrap_content"
-				  android:text=""
-				  android:textColor="@color/label_blue"
-				  android:paddingBottom="5dp"/>
-	    	    	    			
-	    <ProgressBar android:id="@+id/bottom_progress"
-	         		 android:layout_width="fill_parent"
-	         		 android:layout_height="wrap_content"
-	         		 style="@style/CustomProgressBar" 
-	         		 android:layout_marginRight="5dp" />
-	    
-	    <TextView	android:id="@+id/bottom_text"
-	        		android:textColor="@color/text_white"
-	        		android:layout_width="wrap_content"
-	         		android:layout_height="wrap_content"/>
-	    
- 	</LinearLayout>
- 	
 </LinearLayout>

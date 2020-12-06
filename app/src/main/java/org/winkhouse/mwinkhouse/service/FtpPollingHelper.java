@@ -128,7 +128,7 @@ public class FtpPollingHelper {
                   
                   if (risposta.length > 0){
 
-                      ExportSearchParamsHelper esph = new ExportSearchParamsHelper();
+                      ExportSearchParamsHelper esph = new ExportSearchParamsHelper(null);
                       File download = new File(esph.getCloudSearchDirectory()+File.separator+responseFileName);
 
                       OutputStream outputStream2 = new BufferedOutputStream(new FileOutputStream(download));
@@ -153,7 +153,7 @@ public class FtpPollingHelper {
                               String[] rfnArr = responseFileName.split("_");
                               String extraFolderName = "WFTPR_" + rfnArr[2];
 
-                              WirelessImportDataHelper widh = new WirelessImportDataHelper(extraFolderName);
+                              WirelessImportDataHelper widh = new WirelessImportDataHelper(extraFolderName, false);
                               widh.setContext(this.context);
 
                               File destination = new File(Environment.getExternalStorageDirectory() +
@@ -174,7 +174,7 @@ public class FtpPollingHelper {
 
                               if (sdfsu.copyFile(download, destination)) {
 
-                                  if (widh.unZipArchivioWireless(null, null, responseFileName)) {
+                                  if (widh.unZipArchivioWireless(this.context, null, null, responseFileName)) {
 
                                       DataBaseHelper dbh = new DataBaseHelper(context, DataBaseHelper.NONE_DB);
                                       SQLiteDatabase sqldb = dbh.getWritableDatabase();
@@ -250,12 +250,18 @@ public class FtpPollingHelper {
               if (destination.exists()){
                   destination.delete();
               }
-              ExportSearchParamsHelper esph = new ExportSearchParamsHelper();
-              File download = new File(esph.getCloudSearchDirectory()+File.separator+responseFileName);
-              if (download.exists()){
-                  download.delete();
+              ExportSearchParamsHelper esph = null;
+              try {
+                  esph = new ExportSearchParamsHelper(null);
+              } catch (Exception ex) {
+                  ex.printStackTrace();
               }
-
+              if (esph != null) {
+                  File download = new File(esph.getCloudSearchDirectory() + File.separator + responseFileName);
+                  if (download.exists()) {
+                      download.delete();
+                  }
+              }
 
               e.printStackTrace();
           }

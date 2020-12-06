@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.winkhouse.mwinkhouse.activity.ImportActivity.ThreadSincro;
 import org.winkhouse.mwinkhouse.activity.StartUpActivity;
+import org.winkhouse.mwinkhouse.util.SDFileSystemUtils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -36,15 +37,15 @@ public class ImportDataWirelessThread extends Thread {
 		this.msg_down = msg_down;
 		this.status = status;
 		this.mHandler = new Handler();
-		this.importhelper = new WirelessImportDataHelper(null);
+		this.importhelper = new WirelessImportDataHelper(null, false);
 
 		if (this.importhelper.getDataUpdateMode().equalsIgnoreCase(WirelessImportDataHelper.UPDATE_METHOD_SOVRASCRIVI)){
 			this.importhelper.deleteImportDirContent(new File(this.importhelper.getImportDirectory()),new ArrayList<String>());
 		}else{
 			this.importhelper.deleteImportDirContent(new File(this.importhelper.getImportDirectory()),new ArrayList<String>(){{add("immagini");}});
 		}
-
-		this.dbh = new DataBaseHelper(context,DataBaseHelper.NONE_DB);
+        this.context = context;
+		this.dbh = new DataBaseHelper(this.context,DataBaseHelper.NONE_DB);
 		this.sqldb = dbh.getWritableDatabase();
 		
 
@@ -72,7 +73,16 @@ public class ImportDataWirelessThread extends Thread {
         					pd_loader_down.setProgress(1);
         				}
         			});	                		                	
-                	importhelper.unZipArchivioWireless(msg_down,this.mHandler,status.getFilename());
+                	if (!importhelper.unZipArchivioWireless(this.context, msg_down,this.mHandler,status.getFilename())){
+						this.mHandler.post(new Runnable() {
+
+							@Override
+							public void run() {
+								msg_down.setText("Impossibile aprire il file controllare password zip");
+							}
+						});
+						break;
+					};
                 }				
                 if (this.pd_loader_down.getProgress() == 1){
                 	this.mHandler.post(new Runnable() {
@@ -358,6 +368,9 @@ public class ImportDataWirelessThread extends Thread {
 			status = null;
         }catch(Exception e){
         	Log.e("Error", e.getMessage());
+        }finally {
+            SDFileSystemUtils sd = new SDFileSystemUtils();
+            sd.deleteFolder(new File(this.importhelper.getImportDirectory()));
         }
 		
 		

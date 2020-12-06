@@ -197,15 +197,20 @@ public class ImportDataHelper {
     private HashMap<Integer,Integer> codCollouiAgentiMap = null;
 
 
-	public ImportDataHelper(String extraImportPath){
+	public ImportDataHelper(String extraImportPath, boolean overridebasepath){
 
-        location = (extraImportPath == null)
+	    if (overridebasepath == false) {
+            location = (extraImportPath == null)
                     ? baseImportPath
                     : baseImportPath + File.separator + extraImportPath;
 
-		importDirectory = (extraImportPath == null)
-                           ? baseImportPath
-                           : baseImportPath + File.separator + extraImportPath;
+            importDirectory = (extraImportPath == null)
+                    ? baseImportPath
+                    : baseImportPath + File.separator + extraImportPath;
+        }else{
+            location = extraImportPath;
+            importDirectory = extraImportPath;
+        }
 
 		codImmobiliMap = new HashMap<Integer, Integer>();
 		codAnagraficheMap = new HashMap<Integer, Integer>();
@@ -254,9 +259,10 @@ public class ImportDataHelper {
 				
 				Object o = xmlor.read(xmlTag, classToDeserialize);
 				try {
-					Method m = o.getClass().getMethod(primaryKeyGetMethodName, null);
+					Method m = o.getClass().getMethod(primaryKeyGetMethodName, (Class<?>[]) null);
 					try {
-						Integer codPrimarykey = (Integer)m.invoke(o, null);
+
+						Integer codPrimarykey = (Integer)m.invoke(o, (Class<?>) null);
 						returnValue.put(codPrimarykey, o);
 					} catch (IllegalArgumentException e) {
 						e.printStackTrace();
@@ -1622,12 +1628,12 @@ public class ImportDataHelper {
 
 							this.codImmaginiMap.put(oldcod,iVO.getCodImmagine());
 
-							File img = new File(location + File.separator + "immagini" + File.separator + String.valueOf(oldcod) + File.separator + iVO.getPathImmagine());
+							File img = new File(location + File.separator + "immagini" + File.separator + oldcod + File.separator + iVO.getPathImmagine());
 
 							if (img.exists()){
 								SDFileSystemUtils sdfsu = new SDFileSystemUtils();
 
-								File newimg = new File(immaginiPath + File.separator + String.valueOf(codImmobiliMap.get(oldcod)) + File.separator + iVO.getPathImmagine());
+								File newimg = new File(immaginiPath + File.separator + codImmobiliMap.get(oldcod) + File.separator + iVO.getPathImmagine());
 								sdfsu.copyFile(img,newimg);
 							}
 
@@ -1637,16 +1643,16 @@ public class ImportDataHelper {
 
 					}else {
 
-                        File img = new File(location + File.separator + "immagini" + File.separator + String.valueOf(iVO.getCodImmobile()) + File.separator + iVO.getPathImmagine());
+                        File img = new File(location + File.separator + "immagini" + File.separator + iVO.getCodImmobile() + File.separator + iVO.getPathImmagine());
 
                         if (img.exists()){
 
                             SDFileSystemUtils sdfsu = new SDFileSystemUtils();
 
-                            File newimgdir = new File(immaginiPath + File.separator + String.valueOf(iVO.getCodImmobile()));
+                            File newimgdir = new File(immaginiPath + File.separator + iVO.getCodImmobile());
                             newimgdir.mkdirs();
 
-                            File newimg = new File(immaginiPath + File.separator + String.valueOf(iVO.getCodImmobile()) + File.separator + iVO.getPathImmagine());
+                            File newimg = new File(immaginiPath + File.separator + iVO.getCodImmobile() + File.separator + iVO.getPathImmagine());
                             sdfsu.copyFile(img,newimg);
 
                         }
@@ -1664,12 +1670,12 @@ public class ImportDataHelper {
                     Cursor c = sqldb.rawQuery(query,null);
 					if (c.moveToFirst()){
 
-                        File img = new File(location + File.separator + "immagini" + File.separator + String.valueOf(iVO.getCodImmobile()) + File.separator + iVO.getPathImmagine());
+                        File img = new File(location + File.separator + "immagini" + File.separator + iVO.getCodImmobile() + File.separator + iVO.getPathImmagine());
 
                         if (img.exists()){
                             SDFileSystemUtils sdfsu = new SDFileSystemUtils();
 
-                            File newimg = new File(immaginiPath + File.separator + String.valueOf(iVO.getCodImmobile()) + File.separator + iVO.getPathImmagine());
+                            File newimg = new File(immaginiPath + File.separator + iVO.getCodImmobile() + File.separator + iVO.getPathImmagine());
                             sdfsu.copyFile(img,newimg);
                         }
 

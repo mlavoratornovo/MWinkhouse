@@ -60,6 +60,7 @@ import org.winkhouse.mwinkhouse.models.columns.StatoConservativoColumnNames;
 import org.winkhouse.mwinkhouse.models.columns.TipologieImmobiliColumnNames;
 
 import org.winkhouse.mwinkhouse.service.CloudSearchService;
+import org.winkhouse.mwinkhouse.service.WinkCloudHelper;
 import org.winkhouse.mwinkhouse.service.WinkCloudSearchService;
 import org.winkhouse.mwinkhouse.util.ActivityMessages;
 import org.winkhouse.mwinkhouse.util.SysSettingNames;
@@ -230,8 +231,11 @@ public class RicercaImmobiliActivity extends AppCompatActivity {
 
 	class startCloudSearch implements Runnable{
 
+        private Context context = null;
 
-        public startCloudSearch(){}
+        public startCloudSearch(Context context){
+            this.context=context;
+        }
 
         public boolean isConnected(Context context) {
 
@@ -360,6 +364,7 @@ public class RicercaImmobiliActivity extends AppCompatActivity {
             }
         }
 
+
     }
 
 	@Override
@@ -393,7 +398,7 @@ public class RicercaImmobiliActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
                 v.startAnimation(animazione_rotazione_out);
-                v.postDelayed(new startCloudSearch(), 1200);
+                v.postDelayed(new startCloudSearch(v.getContext()), 1200);
             }
 			
 		});

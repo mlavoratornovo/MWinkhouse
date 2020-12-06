@@ -1,9 +1,12 @@
 package org.winkhouse.mwinkhouse.activity.immobili;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
+import org.winkhouse.mwinkhouse.activity.ImportActivity;
 import org.winkhouse.mwinkhouse.activity.adapters.ListaImmobiliAdapter;
 import org.winkhouse.mwinkhouse.activity.adapters.ListaImmobiliSelAdapter;
 import org.winkhouse.mwinkhouse.activity.listeners.DialogImmobiliCancellaListener;
@@ -367,7 +370,16 @@ public class ListaImmobiliActivity extends AppCompatActivity {
 			Intent ricerca_immobile = new Intent(ListaImmobiliActivity.this, RicercaImmobiliActivity.class);
 //			Intent ricerca_immobile = new Intent(ListaImmobiliActivity.this, DummyGDriveActivity.class);
 			ListaImmobiliActivity.this.startActivity(ricerca_immobile);
-		}
+		}else if (itemId == R.id.EsportaZip){
+            if (selected.keySet().size() > 0){
+                Intent intent = new Intent(ListaImmobiliActivity.this, ImportActivity.class);
+                intent.putIntegerArrayListExtra(ActivityMessages.IMMOBILI_LIST, new ArrayList(selected.keySet()));
+//                intent.putExtra(ActivityMessages.ACTIVITY_TYPE, ActivityMessages.EXPORT_ACTION);
+                startActivity(intent);
+            }else{
+                Toast.makeText(ListaImmobiliActivity.this, "Selezionare almeno un immobile",Toast.LENGTH_SHORT).show();
+            }
+        }
 
 		return true;
 	}
