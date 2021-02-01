@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class ExportDataWirelessThread extends Thread {
 
-	private StartUpActivity activity = null;
+	private final StartUpActivity activity = null;
 	private WirelessExportDataHelper exporthelper = null;
 	private DataBaseHelper sqldb = null;
 	private Context context = null;
@@ -25,8 +25,8 @@ public class ExportDataWirelessThread extends Thread {
 	private ProgressBar pd_loader_up = null;
 	private TextView msg_up = null;
 	private Handler mHandler = null;
-    private ArrayList itemsToExport = null;
-	private boolean upstatus = false;
+    private final ArrayList itemsToExport = null;
+	private final boolean upstatus = false;
 	
 	private class ExportDatiHandler extends Handler{
 		

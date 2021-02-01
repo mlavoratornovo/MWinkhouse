@@ -14,7 +14,7 @@ public class ImportDataThread extends Thread {
 
 	private ProgressBar pd_loader = null;
 	private ImportDatiHandler handle = null;
-	private StartUpActivity activity = null;
+	private final StartUpActivity activity = null;
 	private ImportDataHelper importhelper = null;
 	private SQLiteDatabase sqldb = null;
     private EditText message = null;

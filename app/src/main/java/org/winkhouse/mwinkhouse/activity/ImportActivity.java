@@ -46,20 +46,20 @@ import java.util.List;
 public class ImportActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback{
 	private DisplayMetrics dm = null;
 	private final static String REGEX_IPADDRES = "\\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b";
-    private static final int REQUEST_WRITE_PERMISSION = 786;
+    private static final int REQUEST_READ_WRITE_PERMISSION = 786;
 
     private Boolean havePermissions = false;
 	private EditText etpathzipfile = null;
 
 	private TextView top_text = null;
     private TextView labelPercorsoZip = null;
-	private TextView bottom_text = null;
+	private final TextView bottom_text = null;
 	private TextView top_label = null;
-	private TextView bottom_label = null;
+	private final TextView bottom_label = null;
 	private ImageButton salva = null; 
 	private ProgressBar top_progress = null;
-	private ProgressBar bottom_progress = null;
-	private AlertDialog.Builder alertDialog = null;
+	private final ProgressBar bottom_progress = null;
+	private final AlertDialog.Builder alertDialog = null;
 
 	private ArrayList itemsToExport = null;
 
@@ -102,7 +102,7 @@ public class ImportActivity extends Activity implements ActivityCompat.OnRequest
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        havePermissions = requestCode == REQUEST_WRITE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+        havePermissions = requestCode == REQUEST_READ_WRITE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED;
     }
 
 	class SalvaExportListener implements OnClickListener{
@@ -214,8 +214,10 @@ public class ImportActivity extends Activity implements ActivityCompat.OnRequest
 
                 Uri selectedfile = data.getData();
                 if (selectedfile.toString().contains("winkhouse")) {
-                        Uri docUri = DocumentsContract.buildDocumentUriUsingTree(selectedfile,
-                                DocumentsContract.getTreeDocumentId(selectedfile));
+                        Uri docUri = DocumentsContract.buildDocumentUriUsingTree(
+                                        selectedfile,
+                                        DocumentsContract.getTreeDocumentId(selectedfile)
+                                     );
 
                         String path = SDFileSystemUtils.getPath(this, docUri);
 
@@ -321,8 +323,8 @@ public class ImportActivity extends Activity implements ActivityCompat.OnRequest
         if ((ActivityCompat.checkSelfPermission(ImportActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) ||
             (ActivityCompat.checkSelfPermission(ImportActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)){
             ActivityCompat.requestPermissions(ImportActivity.this,
-                                              new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                              REQUEST_WRITE_PERMISSION);
+                                              new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                                              REQUEST_READ_WRITE_PERMISSION);
         }else{
             havePermissions = true;
         }

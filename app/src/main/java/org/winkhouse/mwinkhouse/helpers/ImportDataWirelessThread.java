@@ -18,7 +18,7 @@ public class ImportDataWirelessThread extends Thread {
 	
 	
 	private Context context = null;
-	private StartUpActivity activity = null;
+	private final StartUpActivity activity = null;
 	private WirelessImportDataHelper importhelper = null;
 	private SQLiteDatabase sqldb = null;
 	private DataBaseHelper dbh = null; 
@@ -26,7 +26,7 @@ public class ImportDataWirelessThread extends Thread {
 	private ProgressBar pd_loader_down = null;
 	private TextView msg_down = null;
 	private Handler mHandler = null;
-	private long count = 1;
+	private final long count = 1;
 
 	
 	public ImportDataWirelessThread(Context context,ProgressBar pd_loader_down, TextView msg_down, ThreadSincro status) {
@@ -78,12 +78,12 @@ public class ImportDataWirelessThread extends Thread {
 
 							@Override
 							public void run() {
-								msg_down.setText("Impossibile aprire il file controllare password zip");
+								msg_down.setText("Impossibile aprire il file, zip con password non supportati o problemi con permessi di scrittura");
 							}
 						});
 						break;
-					};
-                }				
+					}
+				}
                 if (this.pd_loader_down.getProgress() == 1){
                 	this.mHandler.post(new Runnable() {
         				

@@ -53,8 +53,8 @@ public class ListaImmobiliActivity extends AppCompatActivity {
 	private ArrayList<ImmobiliVO> listSel = null;
 	private Integer codAnagraficaPropieta = null;
 	private Dialog dialog = null; 		
-	private HashMap<Integer,Object> selectedSel = new HashMap<Integer,Object>();
-	private HashMap<Integer,Object> selected = new HashMap<Integer,Object>();
+	private final HashMap<Integer,Object> selectedSel = new HashMap<Integer,Object>();
+	private final HashMap<Integer,Object> selected = new HashMap<Integer,Object>();
 	private DisplayMetrics dm = null;
 	
 	public ListaImmobiliActivity() {

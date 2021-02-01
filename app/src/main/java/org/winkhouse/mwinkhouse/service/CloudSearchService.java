@@ -41,7 +41,7 @@ import android.widget.Toast;
 
 public class CloudSearchService extends IntentService {
 
-    private Toast t = null;
+    private final Toast t = null;
 
 	public CloudSearchService() {
 

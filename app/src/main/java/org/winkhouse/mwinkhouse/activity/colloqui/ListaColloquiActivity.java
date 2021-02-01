@@ -58,16 +58,16 @@ public class ListaColloquiActivity extends AppCompatActivity {
 	
 	private ListView listView = null;
 	private ListView listViewSel = null;
-	private ListView listViewGeo = null;
+	private final ListView listViewGeo = null;
 	private ArrayList<ColloquiVO> list = null;
 	private ArrayList<ColloquiVO> listsel = null;
-	private ArrayList<GeoVO> listGeo = null;
+	private final ArrayList<GeoVO> listGeo = null;
 	private Integer codimmobile = null;
 	private Integer codanagrafica = null;
 	private Dialog dialog = null;
-	private Dialog dialogCancellazione = null;
-	private HashMap<Integer,Object> selectedSel = new HashMap<Integer,Object>();
-	private HashMap<Integer,Object> selected = new HashMap<Integer,Object>();
+	private final Dialog dialogCancellazione = null;
+	private final HashMap<Integer,Object> selectedSel = new HashMap<Integer,Object>();
+	private final HashMap<Integer,Object> selected = new HashMap<Integer,Object>();
 	private DisplayMetrics dm = null;
 	
 	public ListaColloquiActivity() {

@@ -81,13 +81,13 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class RicercaImmobiliActivity extends AppCompatActivity {
 	
-	private EditText txtProvincia = null;
-	private EditText txtCap = null;
+	private final EditText txtProvincia = null;
+	private final EditText txtCap = null;
 	private EditText txtMqDa = null;
 	private EditText txtMqA = null;
-	private EditText txtAnnoCostruzione = null;
+	private final EditText txtAnnoCostruzione = null;
 	private EditText txtCitta = null;
-	private EditText txtDescrizione = null;
+	private final EditText txtDescrizione = null;
 	private EditText txtIndirizzo = null;
 	private EditText txtZona = null;
 	private Spinner sp_classe_energetica = null;
@@ -99,7 +99,7 @@ public class RicercaImmobiliActivity extends AppCompatActivity {
 	private ArrayList<ClasseEnergeticaVO> al_classi_energetiche = null;
 	private ArrayList<RiscaldamentiVO> al_riscaldamenti = null;
 	private ArrayList<TipologieImmobiliVO> al_tipi_immobili = null;
-    private GoogleApiClient mGoogleApiClient = null;
+    private final GoogleApiClient mGoogleApiClient = null;
 
     private Animation animazione_rotazione_out = null;
 

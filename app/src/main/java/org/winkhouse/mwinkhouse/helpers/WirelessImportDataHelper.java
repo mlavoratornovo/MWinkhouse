@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.os.Handler;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WirelessImportDataHelper extends ImportDataHelper {
 		
@@ -153,7 +154,6 @@ public class WirelessImportDataHelper extends ImportDataHelper {
                             File.separator +
                             "immagini");
         }else{
-          //  Toast.makeText(context,"Impossibile trovare o unzippare il file", Toast.LENGTH_LONG).show();
 			returnValue = false;
         }
 

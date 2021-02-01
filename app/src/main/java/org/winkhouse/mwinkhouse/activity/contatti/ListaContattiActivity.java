@@ -57,7 +57,7 @@ public class ListaContattiActivity extends AppCompatActivity {
 	
 	private int cod_anagrafica = 0;
 	
-	private HashMap<Integer,Object> selected = new HashMap<Integer,Object>();
+	private final HashMap<Integer,Object> selected = new HashMap<Integer,Object>();
 	private DisplayMetrics dm = null;
 	
 	

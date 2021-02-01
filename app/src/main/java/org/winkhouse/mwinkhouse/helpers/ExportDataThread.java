@@ -13,7 +13,7 @@ public class ExportDataThread extends Thread {
 
 	private ProgressDialog pd_loader = null;
 	private ExportDatiHandler handle = null;
-	private StartUpActivity activity = null;
+	private final StartUpActivity activity = null;
 	private ExportDataHelper exporthelper = null;
 	private DataBaseHelper sqldb = null;
 	private Context context = null;

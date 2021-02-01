@@ -189,7 +189,7 @@ public class ImportDataHelper {
 	private HashMap<Integer,Integer> codAttributeMap = null;
 	private HashMap<Integer,Integer> codAbbinamentiMap = null;
 	private HashMap<Integer,Integer> codContattiMap = null;
-	private HashMap<Integer,Integer> codDatiCatastaliMap = null;
+	private final HashMap<Integer,Integer> codDatiCatastaliMap = null;
 	private HashMap<Integer,Integer> codImmaginiMap = null;
 	private HashMap<Integer,Integer> codStanzeImmobiliMap = null;
     private HashMap<Integer,Integer> codCollouiMap = null;
@@ -262,7 +262,7 @@ public class ImportDataHelper {
 					Method m = o.getClass().getMethod(primaryKeyGetMethodName, (Class<?>[]) null);
 					try {
 
-						Integer codPrimarykey = (Integer)m.invoke(o, (Class<?>) null);
+						Integer codPrimarykey = (Integer)m.invoke(o);
 						returnValue.put(codPrimarykey, o);
 					} catch (IllegalArgumentException e) {
 						e.printStackTrace();

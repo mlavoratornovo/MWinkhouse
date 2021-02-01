@@ -3,6 +3,8 @@ package org.winkhouse.mwinkhouse.util;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,8 +25,10 @@ import net.lingala.zip4j.model.enums.EncryptionMethod;
 public class ZipUtils{
 
     private SharedPreferences sharedPref = null;
+	private final Context context = null;
 
     public ZipUtils(Context context){
+
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -36,10 +40,10 @@ public class ZipUtils{
 			
 			ZipFile zf = new ZipFile(new File(pathZipFile));
 			if (zf.isEncrypted()){
-                String cryptKey = sharedPref.getString(SysSettingNames.ZIPPASSWORD,"");
-				zf.setPassword(cryptKey.toCharArray());
+				return false;
+//                String cryptKey = sharedPref.getString(SysSettingNames.ZIPPASSWORD,"");
+//				zf.setPassword(cryptKey.toCharArray());
 			}
-			@SuppressWarnings("unchecked")
 	        List<FileHeader> fileHeaders = zf.getFileHeaders();
 
 	        for(FileHeader fileHeader : fileHeaders) {
@@ -50,10 +54,10 @@ public class ZipUtils{
 			zf.extractAll(unzipPath);
 		} catch (IOException e) {
 			returnValue = false;
-			e.printStackTrace();
+			Log.e("Unzip ERROR", "Errore decompressione file zip", e);
 		} catch (Exception e) {
 			returnValue = false;
-			e.printStackTrace();
+			Log.e("Unzip ERROR", "Errore decompressione file zip", e);
 		}
 		
 		return returnValue;

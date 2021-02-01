@@ -85,7 +85,7 @@ public class DettaglioImmobileFragment extends Fragment {
 	private Spinner sp_riscaldamenti = null;
 	private Spinner sp_tipo_immobile = null;
 	private Spinner sp_statoconservativo = null;
-	private Spinner sp_anagrafiche = null;
+	private final Spinner sp_anagrafiche = null;
 	
 	private ImmobiliVO immobile = null;
 	
@@ -93,7 +93,7 @@ public class DettaglioImmobileFragment extends Fragment {
 	private ArrayList<ClasseEnergeticaVO> al_classi_energetiche = null;
 	private ArrayList<RiscaldamentiVO> al_riscaldamenti = null;
 	private ArrayList<TipologieImmobiliVO> al_tipi_immobili = null;
-	private ArrayList<AnagraficheVO> al_anagrafiche = null;
+	private final ArrayList<AnagraficheVO> al_anagrafiche = null;
 	
 	private WinkTextWatcher wtw_citta = null;
 	private WinkTextWatcher wtw_descrizione = null;
@@ -198,7 +198,7 @@ public class DettaglioImmobileFragment extends Fragment {
 																  adapterGeo, 
 																  cittafind.getText().toString());
 						
-						gft.execute(new Object[]{});
+						gft.execute();
 					}else{
 						Toast.makeText(getActivity().getBaseContext(), "Inserire una città", Toast.LENGTH_SHORT).show();
 					}

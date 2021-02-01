@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+	xmlns:android="http://schemas.android.com/apk/res/android" >
     
     <ListPreference android:title="Fattore di riduzione immagini salvate"
         			android:dialogTitle="Riduzione dimensioni in % del :"
@@ -15,13 +16,15 @@
 	    android:dialogTitle="0 min 100 max"
         android:key="imagequality"        
         android:defaultValue="100" />
-
-    <EditTextPreference android:title="Password zip"
-        android:summary="password da usare per zip/unzip"
-        android:key="zippws"
-        android:inputType="textPassword">
-    </EditTextPreference>
-
+<!--
+	<EditTextPreference
+		android:inputType="textPassword"
+		android:key="zippws"
+		android:summary="password da usare per zip/unzip"
+		android:title="Password zip"
+		android:visibility="invisible"
+		tools:visibility="invisible"></EditTextPreference>
+-->
     <PreferenceCategory
 		android:title="Ricerca Cloud"
 		android:key="pref_key_storage_settings">

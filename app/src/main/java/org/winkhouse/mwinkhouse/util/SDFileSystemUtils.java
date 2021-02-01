@@ -73,7 +73,7 @@ public class SDFileSystemUtils {
         if (fsource.exists() && fsource.isDirectory()) {
             return copyFolder(fsource, fdestination);
         }else{
-            return false;
+            return true;
         }
     }
 
@@ -100,10 +100,12 @@ public class SDFileSystemUtils {
 	    boolean returnValue = true;
 
 	    if (folderToDelete.isDirectory()){
-            for (File folderFile: folderToDelete.listFiles()) {
-                deleteFolder(folderFile);
+	        if (folderToDelete.listFiles() != null) {
+                for (File folderFile : folderToDelete.listFiles()) {
+                    deleteFolder(folderFile);
+                }
+                folderToDelete.delete();
             }
-            folderToDelete.delete();
         }else{
             folderToDelete.delete();
         }

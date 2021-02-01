@@ -68,17 +68,17 @@ public class StartUpActivity extends AppCompatActivity{
 	 */
 	private SystemUiHider mSystemUiHider;
 	
-	private Dialog dialog = null;
+	private final Dialog dialog = null;
 	
 	private final static String REGEX_IPADDRES = "\\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b";
 	
-	private EditText ipWinkhouse = null;
-	private EditText portaWinkhouse = null;
+	private final EditText ipWinkhouse = null;
+	private final EditText portaWinkhouse = null;
 	
-	private static Animation animazione_rotazione_in = null;
+	private static final Animation animazione_rotazione_in = null;
 	private static Animation animazione_rotazione_out = null;
 	
-	private static int anim_type = 4;
+	private static final int anim_type = 4;
 	
 	public final static int TYPE_IMPORT = 0;
 	public final static int TYPE_EXPORT = 1;

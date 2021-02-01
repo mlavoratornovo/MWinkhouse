@@ -26,7 +26,7 @@ import android.widget.TextView;
 
 public class DownloadDataWirelessThread extends Thread {
 	
-	private StartUpActivity activity = null;
+	private final StartUpActivity activity = null;
 	private WirelessImportDataHelper importhelper = null;
 	private Context context = null;
 	private ThreadSincro status = null;
